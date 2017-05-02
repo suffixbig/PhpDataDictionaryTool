@@ -1,4 +1,5 @@
-﻿
+﻿測試位置
+http://test.com/github_cloud/PhpDataDictionaryTool/	
 -----------------------------------------------------
 資料表打註解原則
 :前表示 表中文名
