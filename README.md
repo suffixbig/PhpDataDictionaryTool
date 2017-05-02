@@ -23,13 +23,13 @@
 ---------------------------------------
 	小巧好用的mysql數據庫數據字典生成導出綠色工具
 	數據庫生成數據字典工具(PhpDataDictionaryTool)，支援數據庫包括mysql,等等，可以導出excel,word,html,xls,txt文件
-	![image](https://github.com/suffixbig/PhpDataDictionaryTool/kin/doc/doc01.jpg)
-	![image](https://github.com/suffixbig/PhpDataDictionaryTool/kin/doc/doc02.jpg)
+![image](https://github.com/suffixbig/PhpDataDictionaryTool/kin/doc/doc01.jpg)
+![image](https://github.com/suffixbig/PhpDataDictionaryTool/kin/doc/doc02.jpg)
 ---------------------------------------
 #使用方式
 ---------------------------------------
 	第一步 填寫資料庫密碼，修改config.inc.mysql.php
-```java
+```php
 $cfg['servers'][$i]['host'] = 'localhost';          	//服務器位址
 $cfg['servers'][$i]['port'] = '3306';                 	//端口
 $cfg['servers'][$i]['user'] = 'root';            	//數據庫用戶名
