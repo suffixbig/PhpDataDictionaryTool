@@ -1,0 +1,75 @@
+@charset "utf-8";
+/*全文字體　S********************************************
+/*內文字體修改*/
+body {font-family: 'Open Sans', Helvetica, 'Heiti TC', 微軟正黑體, 'Microsoft Sans Serif', Arial, sans-serif;}
+body {color: #333;background-color: #fff;}
+/*標題字字體修改*/
+h1, h2, h3, h4, h5, h6{font-family: "MHei", "Lucida Grande", "Lucida Sans Unicode", "STHeitiTC-Light", "Microsoft JhengHei", "微軟正黑體", "Microsoft YaHei", "微软雅黑","新細明體", Arial, sans-serif;font-weight: normal;}
+/*所有字體的大小以比例來設定　S*********************************************/
+html { font-size:90% } /* 16px*75%=12px */
+/*接著，所有字級都依此標準來設計制定：*/
+body { font-size:1rem } /* 1*12px=12px */
+p{font-size:1.25rem} /* 1.25*12px=15px */
+li, span{font-size:1.25rem} /* 1.25*12px=15px */
+h1, .h1{font-size:2.8rem} /* 2*12px=24px */
+h2, .h2{font-size:2.3rem}
+h3, .h3{font-size:2rem}
+h4, .h4{font-size:1.5rem}
+fieldset {font-size:1.5rem}
+/*所有字體的大小以比例來設定　E*********************************************/
+/*通用類設定　S***********************************************************/
+/*錨點*/
+.apcss-anchor {display: block;position: relative;top: -100px;visibility: hidden}
+/*英文字要斷行*/
+.word-wrap{word-wrap: break-word;word-break: break-all;}
+/*圓角*/
+.border_5px{-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}
+.border_10 img{border-radius:1rem;}
+/*模糊blur20 IE10-IE12無解*/
+.blur {
+    -webkit-filter: blur(10px); /* Chrome, Opera */
+       -moz-filter: blur(10px);
+        -ms-filter: blur(10px);    
+            filter: blur(10px);
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false); /* IE6~IE9 */
+}
+	
+.form{text-align:left; width:450px; margin:20px auto 0 auto;}
+.form b{display:block; clear:both; margin-top:15px; margin-bottom:-12px;}
+/*通用類設定　END********************************************
+
+
+
+/*背景*/
+.background_ff{ background-color:#FFF}
+.border_5px.background_ff{padding:10px;}
+/*黃色半圓水平線*/
+hr.yellow{ width:98%;border: 0;height: 7px;background-color:#FC0;margin: 15px 0;padding:0;-webkit-border-radius:4px;-moz-border-radius: 4px;border-radius: 5px;}
+
+
+
+/*輪播區背景*/
+.apcss-event-view-wrapper {background: #f5f5f5}
+/*高級技巧讓110%的背景在100的範圍內*/
+.overflow_hidden{position: absolute;width: 100%;height: 650px;overflow:hidden}
+/*把背景圖套用一個模糊blur20*/
+.apcss-event-view-header-blur {width: 110%;height: 620px;margin: -30px -5% 0;text-align: center;background-image: url(/skin/img/03001.jpg);
+}
+
+/*輪播下方字*/
+.apcss-event-view-title {position: relative;text-align: center;}
+.event-section,.event-section2,.event-section2-inverted { background: #fff;padding: 2px 20px}
+.event-end-section {background: #cae4ff;}
+.event-end-section2 {background-color: #397D3D;}
+/*水平線標題*/
+.event-line-caption {font-size: 3rem;color: #333;font-weight: bold;}
+.event-line-caption {width: 100%;margin-bottom: 10px;}
+.line-caption {display: table; white-space: nowrap;text-align: center}
+.line-caption:after,.line-caption:before {border-top: 1px solid #757575;content: '';display: table-cell;position: relative;top: .5em;width: 45%}
+
+.line-caption:before {right: 1.5%}
+.line-caption:after {left: 1.5%}
+
+/**/
+
+
