@@ -26,9 +26,6 @@
 <<<<<<< HEAD
 	<img src="skin/doc/doc01.jpg">
 	<img src="skin/doc/doc02.jpg">
-=======
-![image](https://github.com/suffixbig/PhpDataDictionaryTool/skin/doc/doc01.jpg)
-![image](https://github.com/suffixbig/PhpDataDictionaryTool/skin/doc/doc02.jpg)
 >>>>>>> master
 ---------------------------------------
 #使用方式
