@@ -15,14 +15,15 @@ $thisDir = "."; //config.inc.php檔的相對路徑
 $_file = basename(__FILE__); //自行取得本程式名稱
 require($thisDir . "/config.inc.php"); // 載入主參數設定檔
 require($thisDir . "/config.inc.mysql.php"); //載入資料庫帳號
-if (empty(background_switch)) {
+if(background_switch){
+require(INCLUDE_PATH . "/inc_password.php"); // 載入密碼登入系統
 } else {
-    require(INCLUDE_PATH . "/inc_password.php"); // 載入密碼登入系統
+
 }
 require_once INCLUDE_PATH . "/mysql.inc.php"; // 載入資料庫函式
 require_once INCLUDE_PATH . "/global_suffix.php"; // 載入資料庫函式
 /***********************************************************************************************/
-$typenamech2 = array('列出1個表', '列出全部表', '自選表');
+$typenamech2 = array('單個表列出', '全部表列出', '自由拖拉');
 $i_my = '後台';
 $no_show_databases = array('information_schema', 'mysql', 'performance_schema', 'sys'); //不需要顯示的數據庫
 $no_show_table = array(); //不需要顯示的數據表
@@ -73,15 +74,20 @@ if ($database) {
         }
         //echo "替換表前綴" . $prefix . "替換成功！";
     }
-
+	
 //循環取得所有表的備註及表中列消息
     foreach ($tables as $k => $v) {
-        $sql = 'SELECT * FROM ';
-        $sql .= 'INFORMATION_SCHEMA.TABLES ';
-        $sql .= 'WHERE ';
-        $sql .= "table_name = '{$v['TABLE_NAME']}'  AND table_schema = '{$database}'";
-        $TABLE_COMMENT = row_sql1p($sql, 0, $dblink);
-        $tables[$k]['TABLE_COMMENT'] = $TABLE_COMMENT;
+		//取得各表註解
+		$sql = 'SELECT TABLE_COMMENT FROM ';
+		$sql .= 'INFORMATION_SCHEMA.TABLES ';
+		$sql .= 'WHERE ';
+		$sql .= "table_name = '{$v['TABLE_NAME']}'  AND table_schema = '{$database}'";
+		$tables[$k]['TABLE_COMMENT'] =row_sql1p($sql, 0, $dblink);
+/*
+print_r($tables);
+exit;
+*/
+		//取得各表的每一欄註解
         //==============================================================
         $sql = 'SELECT * FROM ';
         $sql .= 'INFORMATION_SCHEMA.COLUMNS ';
@@ -89,12 +95,12 @@ if ($database) {
         $sql .= "table_name = '{$v['TABLE_NAME']}' AND table_schema = '{$database}'";
 
         $fields = assoc_sql($sql, $dblink);
-        $tables[$k]['COLUMN'] = $fields;
+        $tables[$k]['COLUMN'] = $fields;//子表內容
     }
 //有指定資料庫 情況 END
 }
 _mysql_close($dblink); //關資料庫==============================================================
-//print_r($tables);
+
 /***********************************************************************************************/
 
 /*
@@ -111,6 +117,7 @@ $html = ''; //循環所有表
 if ($database) {
 
     foreach ($tables as $k => $v) {
+
         //如果有替換所有表的表前綴的行為
         if ($prefix) {
             $TABLE_NAME = $tables2[$k]['TABLE_NAME']; //表名
@@ -121,7 +128,8 @@ if ($database) {
         $b = cut_annotations($TABLE_NAME, $v['TABLE_COMMENT']); //參數英文名和註解
 
         //重整出 標題名
-        $tablesB['TABLE_NAME'][] = $b['TABLE_NAME']; //放表英文名
+		$tablesB['TABLE_NAME0'][] = $v['TABLE_NAME']; 	//放表英文名未取代字串前
+        $tablesB['TABLE_NAME'][] =  $b['TABLE_NAME'];	//放表英文名
         $tablesB['TABLE_COMMENT1'][] = $b['TABLE_COMMENT1']; //中文
         $tablesB['TABLE_COMMENT2'][] = $b['TABLE_COMMENT2']; //註解
     }
@@ -181,6 +189,9 @@ if ($database) {
 //有指定資料庫 情況 END
 }
 /*
+echo "表註解整理前";
+print_r($tables);
+echo "表註解整理後子表";
 print_r($tablesB);	
 exit;
 */
@@ -258,10 +269,11 @@ require(INCLUDE_PATH . '/inc_head.php'); //載入表頭
                             <select name="goto_datasheet">
                                 <option value="" selected>選擇資料表</option>
                                 <?php
-                                $b2 = $tablesB['TABLE_NAME'];
+                                $b2 = $tablesB['TABLE_NAME0'];
                                 foreach ($b2 as $k => $v) {
                                     $selected = "";
-                                    echo "<option value=\"" . $prefix . $v . "\" " . $selected . " >" . $v . "</option>";
+									//注意這裡一定要使用原來的表名
+                                    echo "<option value=\"". $v . "\" " . $selected . " >" . $v . "</option>";
                                 }
                                 ?>
                             </select>
@@ -301,16 +313,11 @@ require(INCLUDE_PATH . '/inc_head.php'); //載入表頭
                                 <table class="table table-striped table-bordered">
                                     <thead>
                                     <tr class="info2">
-                                        <th class="sno">序號
-                                        </td>
-                                        <th>表名
-                                        </td>
-                                        <th>別人打的
-                                        </td>
-                                        <th>我打的
-                                        </td>
-                                        <th>用途備註
-                                        </td>
+                                        <th class="sno">序號</th>
+                                        <th>表名</th>
+                                        <th>別人打的</th>
+                                        <th>我打的</th>
+                                        <th>用途備註</th>
                                     </tr>
                                     </thead>
                                     <tbody>

@@ -24,9 +24,9 @@ $cfg['servers'][$i]['database'] = 'credit';      //預設開啟資料庫
 $i=1;//本次使用第幾組設定
 //**************************
 //後台是否要密碼才能進入0否1是
-define("background_switch",1); 
+define("background_switch",1);
 //是的話密碼是什麼
-define("background_password", "taiwan no 1"); 
+define("background_password", "taiwanno1"); 
 
 //特別網址下測試時-設定特別條件
 if(!preg_match("@test.com@",$_SERVER['HTTP_HOST'])){

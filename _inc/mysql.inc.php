@@ -73,6 +73,7 @@ function idgroup($array = array())
 //不連結資料庫-以欄名建立二維陣列
 function assoc_sql($sql, $dblink)
 {
+	$array=array();
     $result = mysqli_query($dblink, $sql) or die("error 單行查詢錯誤: " . $sql); //帶入查詢語法;
 //查詢結果抓出一筆存入array[]陣列
     while ($row = mysqli_fetch_assoc($result)) {

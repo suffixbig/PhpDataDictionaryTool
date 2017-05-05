@@ -15,3 +15,7 @@ http://test.com/github_cloud/PhpDataDictionaryTool/
 範例3
 	產品分類表：用於商品的多級分類#主鍵：category_id#備註第2行#備註第3行
 ------------------------------------------------------
+
+	20170505 除錯紀錄 接收tablename值有加上字尾
+http://test.com/github_cloud/PhpDataDictionaryTool/index.php?DATANAME=credit
+http://test.com/github_cloud/PhpDataDictionaryTool/ajax/goto_datasheet.php?database=credit&tablename=text
