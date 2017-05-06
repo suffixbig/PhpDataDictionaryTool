@@ -92,8 +92,11 @@ fieldset {font-size:1.5rem}
 	background-image: url(../img/tab.png);
 	background-position: center bottom;
 }
-.tab_memu>.nav>li>a:hover{
+.tab_memu>.nav-tabs>li>a:hover{
 	top:-4px;
+}
+.tab_memu>.nav-tabs>li.active>a:hover{
+	top:0px;
 }
 /*********************************************************************/
 /*表格無間距*/
