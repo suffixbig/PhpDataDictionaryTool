@@ -22,10 +22,9 @@ require(INCLUDE_PATH . "/inc_password.php"); // 載入密碼登入系統
 require_once INCLUDE_PATH . "/mysql.inc.php"; // 載入資料庫函式
 require_once INCLUDE_PATH . "/global_suffix.php"; // 載入資料庫函式
 /***********************************************************************************************/
-$typenamech2 = array('單個表列出', '全部表列出', '自由拖拉');
+$typenamech2 = array('單個表列出', '全表列出', '自由拖拉');
 $i_my = '後台';
-$no_show_databases = array('information_schema', 'mysql', 'performance_schema', 'sys'); //不需要顯示的數據庫
-$no_show_table = array(); //不需要顯示的數據表
+
 $_GET['prefix'] = 'oc_'; //替換所有的表前綴
 if (isset($_GET['prefix'])) {
     $prefix = $_GET['prefix'];
@@ -39,13 +38,25 @@ $dblink = _mysql_open(); //開資料庫連線===================================
 $sql = 'SHOW DATABASES';
 $DATANAME = row_sql_a($sql, $dblink);
 
-//過濾不需要顯示的數據庫
-for ($i = 0; $i < count($DATANAME); $i++) {
-    if (!in_array($DATANAME[$i], $no_show_databases)) {
-        $DATANAME2[] = $DATANAME[$i];
-    }
+
+if(count($ok_show_databases)>0){
+	//只顯示清單上的資料庫
+	for ($i = 0; $i < count($DATANAME); $i++) {
+		if (in_array($DATANAME[$i], $ok_show_databases)) {
+			$DATANAME2[] = $DATANAME[$i];
+		}
+	}
+}else{
+	//或是
+	//過濾不需要顯示的數據庫
+	for ($i = 0; $i < count($DATANAME); $i++) {
+		if (!in_array($DATANAME[$i], $no_show_databases)) {
+			$DATANAME2[] = $DATANAME[$i];
+		}
+	}
 }
 $DATANAME = $DATANAME2;
+
 //===========================================================
 if (isset($_GET['DATANAME'])) {
     $database = $_GET['DATANAME'];
@@ -148,7 +159,7 @@ echo "表註解整理後子表";
 print_r($tablesB);	
 exit;
 */
-
+ $bn = "\n";
 require(INCLUDE_PATH . '/inc_head.php'); //載入表頭
 ?>
 <!-- 新 Bootstrap 核心 CSS 文件 -->
@@ -158,7 +169,38 @@ require(INCLUDE_PATH . '/inc_head.php'); //載入表頭
 <!-- 本頁專用 -->
 <link href="skin/css/admin.css" rel="stylesheet">
 </head>
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<body data-spy="scroll" data-target="#navbar-fixed-top" data-offset="20">
+	
+<!--滾動監聽 S-->
+<div class="l_scroll">
+<div class="upper_right" id="upper_right_close"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
+		<nav id="navbar-fixed-top">
+			<div class="l_scroll-fluid">
+			<ul class="nav nav-pills nav-stacked">
+				
+<?php
+//有指定資料庫 情況 S
+if ($database) {
+	$c1 = $tablesB['TABLE_NAME'];
+    for ($i = 0; $i < count($c1); $i++) {
+		/*
+		if($i==0)
+		$classactive=' class="active"';
+		else*/	
+		$classactive='';
+	echo "<li".$classactive.">" . $bn;
+	echo "<a class=\"page-scroll target\" href=\"#" . $c1[$i] . "\">" . $c1[$i] . "</a></td>" . $bn;
+	echo "</li>" . $bn;
+	}
+ }
+ ?>
+			</ul>
+			</div>		
+		</nav>
+
+</div>	
+<!--滾動監聽 END-->
+
 <!--下拉跳網址 S-->
 <div align="center">
     <h3>
@@ -276,7 +318,7 @@ require(INCLUDE_PATH . '/inc_head.php'); //載入表頭
                                     <tbody>
                                     <?php
                                     //列出所有表
-                                    $bn = "\n";
+                                   
                                     $c1 = $tablesB['TABLE_NAME'];
                                     $c2 = $tablesB['TABLE_COMMENT1'];
                                     $c3 = $tablesB['TABLE_COMMENT2']; //註解
@@ -331,12 +373,16 @@ require(INCLUDE_PATH . '/inc_head.php'); //載入表頭
 <div class="w100 height10">
     <!--間距-->
 </div>
+
+
+
+			
 <?php
 require('_inc/inc_footer_s.php'); //載入表尾
 ?>
 <script src="skin/js/jquery.cookie.min.js" type="text/javascript"></script>
 <!--jqueryui-->
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script type="text/javascript">
     //重整
     function locationabc() {
@@ -387,6 +433,23 @@ require('_inc/inc_footer_s.php'); //載入表尾
             }
             return false;
         });
+
+		//--滾動監聽使用內建功能-->
+		
+		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            // 獲取已激活的標籤頁的名稱
+            var activeTab = $(e.target).text();
+            // 獲取前一個激活的標籤頁的名稱
+            var previousTab = $(e.relatedTarget).text();
+				if(activeTab=='全表列出')
+					$('.l_scroll').animate({"left":0},500);
+				else
+					$('.l_scroll').animate({"left":-200},500);
+        });
+		//關閉按鈕
+		$("#upper_right_close").click(function(){
+			$('.l_scroll').animate({"left":-200},500);
+		});
 
     });
 </script>

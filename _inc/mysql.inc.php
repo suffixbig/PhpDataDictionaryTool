@@ -22,7 +22,7 @@ function _mysql_open($table_db = '')
     //$mysqli->query("USE ".$database);//切換資料庫
 
     if (mysqli_connect_errno($mysqli)) {
-        echo "連接 MySQL 失敗: " . mysqli_connect_error();
+        echo "連接 MySQL 失敗: ",mysqli_connect_error();
     }
     return $mysqli;
 }
