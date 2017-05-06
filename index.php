@@ -18,7 +18,6 @@ require($thisDir . "/config.inc.mysql.php"); //載入資料庫帳號
 if(background_switch){
 require(INCLUDE_PATH . "/inc_password.php"); // 載入密碼登入系統
 } else {
-
 }
 require_once INCLUDE_PATH . "/mysql.inc.php"; // 載入資料庫函式
 require_once INCLUDE_PATH . "/global_suffix.php"; // 載入資料庫函式
@@ -136,55 +135,9 @@ if ($database) {
 
 
     foreach ($tables as $k => $v) {
-        $TABLE_NAME = $tablesB['TABLE_NAME'][$k];
-        //顯示第1行字標題
-        $html .= '<a name="' . $TABLE_NAME . '" id="' . $TABLE_NAME . '">'; //id
-        $html .= '</a>'; //id
-        $html .= '	<h2>' . ($k + 1) . '、' . $tablesB['TABLE_COMMENT1'][$k] . '  （<span class="cr">' . $TABLE_NAME . '</span>）</h2>' . "\n"; //標題
-
-        //顯示第2行字註解
-        if ($tablesB['TABLE_COMMENT2'][$k]) {
-            $html .= '<div><h3>';
-            $html .= str_replace("#", "<br>\n", $tablesB['TABLE_COMMENT2'][$k]); //替換換行字串
-            $html .= '</h3></div>';
-        }
-
-        $html .= '<table border="1" cellspacing="0" cellpadding="0" width="100%" class="table table-striped table-bordered" >' . "\n";
-        $html .= '		<tbody>' . "\n";
-        $html .= '			<tr>' . "\n";
-        $html .= '				<th>字段名</th>' . "\n";
-        $html .= '				<th>數據類型</th>' . "\n";
-        $html .= '				<th>數據類型</th>' . "\n";
-        $html .= '				<th>長度</th>' . "\n";
-        $html .= '				<th>默認值</th>' . "\n";
-        $html .= '				<th>允許非空</th>' . "\n";
-        $html .= '				<th>主鍵</th>' . "\n";
-        $html .= '				<th>備註</th>' . "\n";
-        $html .= '			</tr>' . "\n";
-        //表的值COLUMN
-        foreach ($v['COLUMN'] as $f) {
-            $html .= '			<tr>' . "\n";
-            $html .= '				<td class="c1">' . $f['COLUMN_NAME'] . '</td>' . "\n";
-            $html .= '				<td class="c2">' . _lang($f['DATA_TYPE'], $lang_columntype) . '</td>' . "\n";
-            $html .= '				<td class="c0c">' . $f['DATA_TYPE'] . '</td>' . "\n";
-            //長度
-            $LENGTH = "";
-            if ($f['NUMERIC_PRECISION']) {
-                $LENGTH = $f['NUMERIC_PRECISION'];
-            } else {
-                if ($f['CHARACTER_OCTET_LENGTH']) {
-                    $LENGTH = $f['CHARACTER_OCTET_LENGTH'];
-                }
-            }
-            $html .= '				<td class="c0c">' . $LENGTH . '</td>' . "\n";
-            $html .= '				<td class="c0c">' . $f['COLUMN_DEFAULT'] . '</td>' . "\n";
-            $html .= '				<td class="c0c">' . $f['IS_NULLABLE'] . '</td>' . "\n";
-            $html .= '				<td class="c5">' . $f['COLUMN_KEY'] . ($f['EXTRA'] == 'auto_increment' ? '+自增' : '&nbsp;') . '</td>' . "\n";
-            $html .= '				<td class="c6">' . $f['COLUMN_COMMENT'] . '</td>' . "\n";
-            $html .= '			</tr>' . "\n";
-        }
-        $html .= '		</tbody>' . "\n";
-        $html .= '	</table>' . "\n";
+		//重複程式碼
+		//參數$html,$tablesB=有放註解的數組,$k=第幾個,$v=表的各欄值
+		$html=combination_of_content($html,$tablesB,$k,$v);
     }
 //有指定資料庫 情況 END
 }
