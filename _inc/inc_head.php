@@ -18,3 +18,5 @@ echo $CT_CONFIG['html_title'];
 <!-- favorite icon ends -->
 <meta name="keywords" lang="zh-TW" content="">
 <meta name="description" content="">
+<!-- jQuery文件。務必在bootstrap.min.js 之前引入 -->
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>

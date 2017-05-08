@@ -1,0 +1,1044 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<title>數據字典-後台</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--ico-->
+<!-- favorite icon starts -->
+<link rel="shortcut icon" href="/favicon.ico" />
+<!--<link rel="shortcut icon" href="/icon.png" type="image/x-icon" />-->
+<link rel="apple-touch-icon" href="/AppIcon.png" />
+<!-- favorite icon ends -->
+<meta name="keywords" lang="zh-TW" content="">
+<meta name="description" content=""><!-- 新 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="skin/js/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- 可選的Bootstrap主題文件（一般不用引入） 
+<link rel="stylesheet" href="/skin/js/bootstrap/3.3.7/css/bootstrap-theme.min.css">-->
+<!-- 本頁專用 -->
+<link href="skin/css/admin.css" rel="stylesheet">
+</head>
+<body data-spy="scroll" data-target="#navbar-fixed-top" data-offset="20">
+	
+<!--滾動監聽 S-->
+<div class="l_scroll">
+<div class="upper_right" id="upper_right_close"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
+		<nav id="navbar-fixed-top">
+			<div class="l_scroll-fluid">
+			<ul class="nav nav-pills nav-stacked">
+				
+<li>
+<a class="page-scroll target" href="#coop-land.ru">coop-land.ru</a>
+</li>
+<li>
+<a class="page-scroll target" href="#member">member</a>
+</li>
+<li>
+<a class="page-scroll target" href="#text">text</a>
+</li>
+<li>
+<a class="page-scroll target" href="#wiki">wiki</a>
+</li>
+			</ul>
+			</div>		
+		</nav>
+
+</div>	
+<!--滾動監聽 END-->
+
+<!--下拉跳網址 S-->
+<div align="center">
+    <h3>
+        <select name="goto_url">
+            <option value="" selected>選擇資料庫</option>
+            <option value="index.php?DATANAME=cart_opencart_00"  >cart_opencart_00</option><option value="index.php?DATANAME=coachmin"  >coachmin</option><option value="index.php?DATANAME=cooplan"  >cooplan</option><option value="index.php?DATANAME=credit" selected="selected" >credit</option><option value="index.php?DATANAME=d_house"  >d_house</option><option value="index.php?DATANAME=dtest"  >dtest</option><option value="index.php?DATANAME=gsview"  >gsview</option><option value="index.php?DATANAME=h_show_view_sys"  >h_show_view_sys</option><option value="index.php?DATANAME=managedb"  >managedb</option><option value="index.php?DATANAME=softstarwebdb"  >softstarwebdb</option><option value="index.php?DATANAME=web_a01"  >web_a01</option><option value="index.php?DATANAME=web_admin"  >web_admin</option><option value="index.php?DATANAME=web_wab"  >web_wab</option><option value="index.php?DATANAME=web_wad"  >web_wad</option><option value="index.php?DATANAME=wtest_ox104_com"  >wtest_ox104_com</option>        </select>
+    </h3>
+
+
+</div>
+<!--下拉跳網址 END-->
+<!-- 標題區 -->
+<div class="title-block">
+    <h1 class="text_shadow">
+        數據/資料庫字典生成工具    </h1>
+</div>
+<!--PC頁簽區hidden-xs-->
+<div class="tab_memu">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#home1" data-toggle="tab" role="tab" aria-controls="tab1"  onclick="cookie_intype(1);">單個表列出</a></li><li role="presentation" ><a href="#home2" data-toggle="tab" role="tab" aria-controls="tab2"  onclick="cookie_intype(2);">全表列出</a></li><li role="presentation" ><a href="#home3" data-toggle="tab" role="tab" aria-controls="tab3"  onclick="cookie_intype(3);">自由拖拉</a></li>    </ul>
+</div>
+<!--PC頁簽區END-->
+<div class="w100 height10">
+    <!--間距-->
+</div>
+<div id="tabContent1" class="tab-content">
+    <!--DIV切換區 S-->
+    <!--第1區END-->
+    <div role="tabpanel" class="tab-pane fade in active" id="home1">
+        <!--預設選中-->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!--第1區 內容 S-->
+                    <!--下拉跳資料表 S-->
+                    <div align="center">
+                        <h3>
+                            <select name="goto_datasheet">
+                                <option value="" selected>選擇資料表</option>
+                                <option value="coop-land.ru"  >coop-land.ru</option><option value="member"  >member</option><option value="text"  >text</option><option value="wiki"  >wiki</option>                            </select>
+                        </h3>
+
+
+                    </div>
+                    <!--下拉跳網址 END-->
+                    <hr>
+                    <div id="div_home2"></div>
+
+                </div>
+            </div>
+            <!--./row./col-md-12-->
+        </div>
+        <!--./container-->
+    </div>
+    <!--./home1-->
+    <!--第1區END-->
+    <!-------------------------------------------------------------------------------->
+    <!--第2區開始-->
+    <div role="tabpanel" class="tab-pane fade" id="home2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                                            <h1 style="text-align:center;">
+                            credit                            數據庫字典</h1>
+                        <hr>
+                        <!--響應式表格-->
+                        <div class="generallist">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                    <tr class="info2">
+                                        <th class="sno">序號</th>
+                                        <th>表名</th>
+                                        <th>別人打的</th>
+                                        <th>我打的</th>
+                                        <th>用途備註</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+<td class="cc">1</td>
+<td><a class="page-scroll" href="#coop-land.ru">coop-land.ru</a></td>
+<td class="c4"></td>
+<td>coop-land.ru網站來源資料</td>
+<td></td>
+</tr>
+<tr>
+<td class="cc">2</td>
+<td><a class="page-scroll" href="#member">member</a></td>
+<td class="c4"></td>
+<td>開放式會員資料表，全欄位只有帳號是必填</td>
+<td></td>
+</tr>
+<tr>
+<td class="cc">3</td>
+<td><a class="page-scroll" href="#text">text</a></td>
+<td class="c4"></td>
+<td>文章</td>
+<td></td>
+</tr>
+<tr>
+<td class="cc">4</td>
+<td><a class="page-scroll" href="#wiki">wiki</a></td>
+<td class="c4"></td>
+<td>辭典</td>
+<td></td>
+</tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="warp">
+                            <a name="coop-land.ru" id="coop-land.ru"></a><h2>1、coop-land.ru網站來源資料  （<span class="cr">coop-land.ru</span>）</h2>
+<table border="1" cellspacing="0" cellpadding="0" width="100%" class="table table-striped table-bordered" >
+		<tbody>
+			<tr>
+				<th>字段名</th>
+				<th>數據類型</th>
+				<th>數據類型</th>
+				<th>長度</th>
+				<th>默認值</th>
+				<th>允許非空</th>
+				<th>主鍵</th>
+				<th>備註</th>
+			</tr>
+			<tr>
+				<td class="c1">sno</td>
+				<td class="c2">數字</td>
+				<td class="c0c">int</td>
+				<td class="c0c">10</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">PRI+自增</td>
+				<td class="c6"></td>
+			</tr>
+			<tr>
+				<td class="c1">name</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">300</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">遊戲英文名稱</td>
+			</tr>
+			<tr>
+				<td class="c1">web_cooplandru</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">765</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">
+                 
+                 <textarea name="textarea" rows="2" id="textarea">coop-land.ru網址</textarea>                  
+                 <input type="submit" name="submit" id="submit" value="修改">
+                  
+                  
+                  </td>
+			</tr>
+			<tr>
+				<td class="c1">gametype</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">90</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">遊戲類型</td>
+			</tr>
+			<tr>
+				<td class="c1">cp</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">90</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">合作模式</td>
+			</tr>
+			<tr>
+				<td class="c1">maxcp</td>
+				<td class="c2">數字</td>
+				<td class="c0c">int</td>
+				<td class="c0c">10</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">合作模式最大人數</td>
+			</tr>
+			<tr>
+				<td class="c1">vs</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">90</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">VS模式</td>
+			</tr>
+			<tr>
+				<td class="c1">maxvs</td>
+				<td class="c2">數字</td>
+				<td class="c0c">int</td>
+				<td class="c0c">10</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">VS模式最大人數</td>
+			</tr>
+			<tr>
+				<td class="c1">lan</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">90</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">可區域網路連練</td>
+			</tr>
+			<tr>
+				<td class="c1">r</td>
+				<td class="c2">數字</td>
+				<td class="c0c">int</td>
+				<td class="c0c">10</td>
+				<td class="c0c">0</td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">評分1~99分</td>
+			</tr>
+			<tr>
+				<td class="c1">date</td>
+				<td class="c2">日期</td>
+				<td class="c0c">date</td>
+				<td class="c0c"></td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">發售日期</td>
+			</tr>
+			<tr>
+				<td class="c1">add_date</td>
+				<td class="c2">日期時間</td>
+				<td class="c0c">datetime</td>
+				<td class="c0c"></td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">資料更新時間</td>
+			</tr>
+			<tr>
+				<td class="c1">steamid</td>
+				<td class="c2">數字</td>
+				<td class="c0c">int</td>
+				<td class="c0c">10</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">steam的id</td>
+			</tr>
+			<tr>
+				<td class="c1">steamid_scanning</td>
+				<td class="c2">數子選項</td>
+				<td class="c0c">tinyint</td>
+				<td class="c0c">3</td>
+				<td class="c0c">0</td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">是否掃描過steamid，0否1是</td>
+			</tr>
+			<tr>
+				<td class="c1">sse</td>
+				<td class="c2">數子選項</td>
+				<td class="c0c">tinyint</td>
+				<td class="c0c">3</td>
+				<td class="c0c">0</td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">是否有SSE破解0不確定1否2是</td>
+			</tr>
+		</tbody>
+	</table>
+<a name="member" id="member"></a><h2>2、開放式會員資料表，全欄位只有帳號是必填  （<span class="cr">member</span>）</h2>
+<table border="1" cellspacing="0" cellpadding="0" width="100%" class="table table-striped table-bordered" >
+		<tbody>
+			<tr>
+				<th>字段名</th>
+				<th>數據類型</th>
+				<th>數據類型</th>
+				<th>長度</th>
+				<th>默認值</th>
+				<th>允許非空</th>
+				<th>主鍵</th>
+				<th>備註</th>
+			</tr>
+			<tr>
+				<td class="c1">uid</td>
+				<td class="c2">數字</td>
+				<td class="c0c">int</td>
+				<td class="c0c">10</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">PRI+自增</td>
+				<td class="c6">
+                 </td>
+			</tr>
+			<tr>
+				<td class="c1">account_type</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">150</td>
+				<td class="c0c">local</td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">加入來源1.本站local OPENID 2.GOOGLE 3.facebook 用文字或是網站名</td>
+			</tr>
+			<tr>
+				<td class="c1">account</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">90</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">UNI&nbsp;</td>
+				<td class="c6">帳號</td>
+			</tr>
+			<tr>
+				<td class="c1">password</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">765</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">密碼因為是MD5加密要長點</td>
+			</tr>
+			<tr>
+				<td class="c1">email</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">150</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">UNI&nbsp;</td>
+				<td class="c6">email</td>
+			</tr>
+			<tr>
+				<td class="c1">name</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">90</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">名子</td>
+			</tr>
+			<tr>
+				<td class="c1">nickname</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">90</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">暱稱</td>
+			</tr>
+			<tr>
+				<td class="c1">avatar</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">765</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">大頭照位置</td>
+			</tr>
+			<tr>
+				<td class="c1">birthday</td>
+				<td class="c2">日期</td>
+				<td class="c0c">date</td>
+				<td class="c0c"></td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">生日</td>
+			</tr>
+			<tr>
+				<td class="c1">created_at</td>
+				<td class="c2">日期時間</td>
+				<td class="c0c">datetime</td>
+				<td class="c0c"></td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">加入日期</td>
+			</tr>
+			<tr>
+				<td class="c1">updated_at</td>
+				<td class="c2">數字</td>
+				<td class="c0c">int</td>
+				<td class="c0c">10</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">最後登入時間</td>
+			</tr>
+			<tr>
+				<td class="c1">deleted_at</td>
+				<td class="c2">數字</td>
+				<td class="c0c">int</td>
+				<td class="c0c">10</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">帳號刪除時間	有刪除日期就是刪除	預設 NULL</td>
+			</tr>
+			<tr>
+				<td class="c1">is_enable</td>
+				<td class="c2">數子選項</td>
+				<td class="c0c">tinyint</td>
+				<td class="c0c">3</td>
+				<td class="c0c">0</td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">是否認證過，0否1是 預設0</td>
+			</tr>
+			<tr>
+				<td class="c1">lang</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">30</td>
+				<td class="c0c">zh-tw</td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">國家語言,預設zh-tw 或 zh-ch 或en</td>
+			</tr>
+			<tr>
+				<td class="c1">phone</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">765</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">手機電話(要加密)</td>
+			</tr>
+			<tr>
+				<td class="c1">address</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">765</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">地址要(加密)</td>
+			</tr>
+			<tr>
+				<td class="c1">postalcode</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">15</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">郵遞區號，我國郵遞區號5碼</td>
+			</tr>
+			<tr>
+				<td class="c1">lv</td>
+				<td class="c2">數字</td>
+				<td class="c0c">int</td>
+				<td class="c0c">10</td>
+				<td class="c0c">0</td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">會員等級0~10 超級管理員就是11級</td>
+			</tr>
+			<tr>
+				<td class="c1">uid_login_ok</td>
+				<td class="c2">數子選項</td>
+				<td class="c0c">tinyint</td>
+				<td class="c0c">3</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">設為1的話可以用會員UID登入-以防換EMAIL變成無法登入</td>
+			</tr>
+			<tr>
+				<td class="c1">sex</td>
+				<td class="c2">數子選項</td>
+				<td class="c0c">tinyint</td>
+				<td class="c0c">3</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">性別0.未知 1.男 2.女 3.中性</td>
+			</tr>
+			<tr>
+				<td class="c1">xx</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">765</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">頭銜</td>
+			</tr>
+		</tbody>
+	</table>
+<a name="text" id="text"></a><h2>3、文章  （<span class="cr">text</span>）</h2>
+<table border="1" cellspacing="0" cellpadding="0" width="100%" class="table table-striped table-bordered" >
+		<tbody>
+			<tr>
+				<th>字段名</th>
+				<th>數據類型</th>
+				<th>數據類型</th>
+				<th>長度</th>
+				<th>默認值</th>
+				<th>允許非空</th>
+				<th>主鍵</th>
+				<th>備註</th>
+			</tr>
+			<tr>
+				<td class="c1">sno</td>
+				<td class="c2">數字</td>
+				<td class="c0c">int</td>
+				<td class="c0c">10</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">PRI+自增</td>
+				<td class="c6">sno</td>
+			</tr>
+			<tr>
+				<td class="c1">type1</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">150</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">大類別</td>
+			</tr>
+			<tr>
+				<td class="c1">type2</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">60</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">標題類別，定義，公式，原則</td>
+			</tr>
+			<tr>
+				<td class="c1">title</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">300</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">標題</td>
+			</tr>
+			<tr>
+				<td class="c1">doc</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">750</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">簡短說明200字以內</td>
+			</tr>
+			<tr>
+				<td class="c1">text</td>
+				<td class="c2">文章</td>
+				<td class="c0c">text</td>
+				<td class="c0c">65535</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">內容</td>
+			</tr>
+			<tr>
+				<td class="c1">url</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">765</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">外部連結原文</td>
+			</tr>
+			<tr>
+				<td class="c1">url_title</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">300</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">外部連結標題</td>
+			</tr>
+			<tr>
+				<td class="c1">original</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">75</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">原作者</td>
+			</tr>
+			<tr>
+				<td class="c1">adddate</td>
+				<td class="c2">日期</td>
+				<td class="c0c">date</td>
+				<td class="c0c"></td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">資料建立時間</td>
+			</tr>
+			<tr>
+				<td class="c1">adddatetime</td>
+				<td class="c2">日期時間</td>
+				<td class="c0c">datetime</td>
+				<td class="c0c"></td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">資料建立時間-防5分鐘發文灌水</td>
+			</tr>
+			<tr>
+				<td class="c1">changetime</td>
+				<td class="c2">數字時間戳</td>
+				<td class="c0c">timestamp</td>
+				<td class="c0c"></td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">資料修改時間</td>
+			</tr>
+			<tr>
+				<td class="c1">uid</td>
+				<td class="c2">數字</td>
+				<td class="c0c">int</td>
+				<td class="c0c">10</td>
+				<td class="c0c">10000001</td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">資料上傳人的uid</td>
+			</tr>
+			<tr>
+				<td class="c1">clang</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">15</td>
+				<td class="c0c">zh-tw</td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">文章語言編碼</td>
+			</tr>
+			<tr>
+				<td class="c1">font</td>
+				<td class="c2">數字</td>
+				<td class="c0c">int</td>
+				<td class="c0c">10</td>
+				<td class="c0c">0</td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">文章字體</td>
+			</tr>
+			<tr>
+				<td class="c1">sort</td>
+				<td class="c2">數字</td>
+				<td class="c0c">int</td>
+				<td class="c0c">10</td>
+				<td class="c0c">1</td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">排序號碼小的在前</td>
+			</tr>
+			<tr>
+				<td class="c1">open</td>
+				<td class="c2">數字</td>
+				<td class="c0c">int</td>
+				<td class="c0c">10</td>
+				<td class="c0c">0</td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">多人協作開關0=不開放1開放</td>
+			</tr>
+			<tr>
+				<td class="c1">openlv</td>
+				<td class="c2">數字</td>
+				<td class="c0c">int</td>
+				<td class="c0c">10</td>
+				<td class="c0c">0</td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">多人協作開方等級</td>
+			</tr>
+			<tr>
+				<td class="c1">readlv</td>
+				<td class="c2">數字</td>
+				<td class="c0c">int</td>
+				<td class="c0c">10</td>
+				<td class="c0c">0</td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">閱讀權限-閱讀權限就是代表你的等級大於多少才看得了</td>
+			</tr>
+		</tbody>
+	</table>
+<a name="wiki" id="wiki"></a><h2>4、辭典  （<span class="cr">wiki</span>）</h2>
+<table border="1" cellspacing="0" cellpadding="0" width="100%" class="table table-striped table-bordered" >
+		<tbody>
+			<tr>
+				<th>字段名</th>
+				<th>數據類型</th>
+				<th>數據類型</th>
+				<th>長度</th>
+				<th>默認值</th>
+				<th>允許非空</th>
+				<th>主鍵</th>
+				<th>備註</th>
+			</tr>
+			<tr>
+				<td class="c1">id</td>
+				<td class="c2">數字</td>
+				<td class="c0c">int</td>
+				<td class="c0c">10</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">PRI+自增</td>
+				<td class="c6">id</td>
+			</tr>
+			<tr>
+				<td class="c1">noun</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">60</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">名詞</td>
+			</tr>
+			<tr>
+				<td class="c1">type1</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">150</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">大類別</td>
+			</tr>
+			<tr>
+				<td class="c1">type2</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">30</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">標題類別，定義，公式，原則</td>
+			</tr>
+			<tr>
+				<td class="c1">title</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">300</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">標題</td>
+			</tr>
+			<tr>
+				<td class="c1">doc</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">1500</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">簡短說明200字以內</td>
+			</tr>
+			<tr>
+				<td class="c1">text</td>
+				<td class="c2">文章</td>
+				<td class="c0c">text</td>
+				<td class="c0c">65535</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">詳細說明</td>
+			</tr>
+			<tr>
+				<td class="c1">url_i</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">90</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">內部連結原文</td>
+			</tr>
+			<tr>
+				<td class="c1">url</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">765</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">外部連結原文</td>
+			</tr>
+			<tr>
+				<td class="c1">url_title</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">300</td>
+				<td class="c0c"></td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">外部連結標題</td>
+			</tr>
+			<tr>
+				<td class="c1">adddate</td>
+				<td class="c2">日期</td>
+				<td class="c0c">date</td>
+				<td class="c0c"></td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">資料建立時間</td>
+			</tr>
+			<tr>
+				<td class="c1">adddatetime</td>
+				<td class="c2">日期時間</td>
+				<td class="c0c">datetime</td>
+				<td class="c0c"></td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">新增資料完整時間</td>
+			</tr>
+			<tr>
+				<td class="c1">changetime</td>
+				<td class="c2">數字時間戳</td>
+				<td class="c0c">timestamp</td>
+				<td class="c0c"></td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">資料修改時間</td>
+			</tr>
+			<tr>
+				<td class="c1">original</td>
+				<td class="c2">字串</td>
+				<td class="c0c">varchar</td>
+				<td class="c0c">75</td>
+				<td class="c0c"></td>
+				<td class="c0c">YES</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">名義上的作者</td>
+			</tr>
+			<tr>
+				<td class="c1">uid</td>
+				<td class="c2">數字</td>
+				<td class="c0c">int</td>
+				<td class="c0c">10</td>
+				<td class="c0c">10000001</td>
+				<td class="c0c">NO</td>
+				<td class="c5">&nbsp;</td>
+				<td class="c6">資料建立者</td>
+			</tr>
+		</tbody>
+	</table>
+ </div>
+                                        </div>
+            </div>
+            <!--./row./col-md-12-->
+        </div>
+        <!--./container-->
+    </div>
+    <!--./home2-->
+    <!--第2區END-->
+    <!-------------------------------------------------------------------------------->
+    <!--第3區開始-->
+    <div role="tabpanel" class="tab-pane fade" id="home3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="zero">歸零</button>
+                    <button id="btn">顯示數據</button>
+                    <br/>
+                    <div id="svg123"></div>
+                </div>
+            </div>
+            <!--./row./col-md-12-->
+        </div>
+        <!--./container-->
+    </div>
+    <!--./home2-->
+    <!-------------------------------------------------------------------------------->
+</div>
+<!--/tabContent1 DIV切換區 END-->
+<div class="w100 height10">
+    <!--間距-->
+</div>
+
+
+
+			
+<!-- jQuery文件。務必在bootstrap.min.js 之前引入 -->
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><script src="skin/js/jquery.cookie.min.js" type="text/javascript"></script>
+<!--jqueryui-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script type="text/javascript">
+    //重整
+    function locationabc() {
+        location.reload(true);
+    }
+    //把選項記憶一天
+    function cookie_intype($s) {
+        $.cookie('im_type_ad', $s, {
+            path: '/',
+            expires: 10
+        });
+    }
+
+    function cookie_insale($s) {
+        $.cookie('sale', $s, {
+            path: '/',
+            expires: 10
+        });
+        locationabc();
+    }
+
+    $(function () {
+
+        //連結捲過去有使用jquery-ui
+        $('a.page-scroll').bind('click', function (event) {
+            var $anchor = $(this);
+            $('html, body').stop().animate({
+                scrollTop: $($anchor.attr('href')).offset().top
+            }, 1500, 'easeInOutExpo');
+            event.preventDefault();
+        });
+        // 綁定下拉式選項跳頁
+        // 如果jQuery版本是 < 1.7, 取代 on 使用 bind
+        $('select[name="goto_url"]').on('change', function () {
+            var url = $(this).val(); // get selected value
+            if (url) {
+                window.location = url; // redirect
+            }
+            return false;
+        });
+        // 下拉選單
+        $('select[name="goto_datasheet"]').on('change', function () {
+            var url = $(this).val(); // get selected value
+            if (url) {
+                //window.location = url; // redirect
+                $("#div_home2").load("ajax/goto_datasheet.php?database=credit&tablename=" + url);
+
+            }
+            return false;
+        });
+
+		//--滾動監聽使用內建功能-->
+		
+		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            // 獲取已激活的標籤頁的名稱
+            var activeTab = $(e.target).text();
+            // 獲取前一個激活的標籤頁的名稱
+            var previousTab = $(e.relatedTarget).text();
+				if(activeTab=='全表列出')
+					$('.l_scroll').animate({"left":0},500);
+				else
+					$('.l_scroll').animate({"left":-200},500);
+        });
+		//關閉按鈕
+		$("#upper_right_close").click(function(){
+			$('.l_scroll').animate({"left":-200},500);
+		});
+
+    });
+</script>
+</body>
+</html>

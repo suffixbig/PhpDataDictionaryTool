@@ -142,6 +142,7 @@ if ($database) {
         $tablesB['TABLE_NAME'][] =  $b['TABLE_NAME'];	//放表英文名
         $tablesB['TABLE_COMMENT1'][] = $b['TABLE_COMMENT1']; //中文
         $tablesB['TABLE_COMMENT2'][] = $b['TABLE_COMMENT2']; //註解
+		$tablesB['TABLE_COMMENT0'][] = $v['TABLE_COMMENT']; //註解 為拆解前	
     }
 
 
@@ -312,7 +313,7 @@ if ($database) {
                                         <th>表名</th>
                                         <th>別人打的</th>
                                         <th>我打的</th>
-                                        <th>用途備註</th>
+										<th>修改</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -320,15 +321,23 @@ if ($database) {
                                     //列出所有表
                                    
                                     $c1 = $tablesB['TABLE_NAME'];
-                                    $c2 = $tablesB['TABLE_COMMENT1'];
-                                    $c3 = $tablesB['TABLE_COMMENT2']; //註解
+                                    $c2 = $tablesB['TABLE_COMMENT0'];//註解
                                     for ($i = 0; $i < count($c1); $i++) {
+									$cid="edit_".$c1[$i];	
                                         echo "<tr>" . $bn;
                                         echo "<td class=\"cc\">" . ($i + 1) . "</td>" . $bn;
                                         echo "<td><a class=\"page-scroll\" href=\"#" . $c1[$i] . "\">" . $c1[$i] . "</a></td>" . $bn;
                                         echo "<td class=\"c4\">" . _lang($c1[$i], $lang_tablenames) . "</td>" . $bn;
-                                        echo "<td>" . $c2[$i] . "</td>" . $bn;
-                                        echo "<td>" . $c3[$i] . "</td>" . $bn;
+                                        echo "<td><textarea class=\"w100\" name=\"edit_text\" rows=\"1\" id=\"".$cid."\">" . $c2[$i] . "</textarea></td>" . $bn;//修改
+										echo '<td>';
+echo '										
+<button type="button" class="w100" 
+data-container="body" data-toggle="popover" data-placement="right" 
+data-content="儲存中...." id="b'.$cid.'">
+修改
+</button>';
+													echo '</td>' . $bn;//修改按鈕
+										
                                         echo "</tr>" . $bn;
                                     }
                                     ?>
@@ -339,9 +348,38 @@ if ($database) {
                         <hr>
                         <div class="warp">
                             <?php echo $html; ?> </div>
-                        <?php
+<script>        
+ $(function() {
+		//工具提示啟用
+		$("[data-toggle='popover']").popover();
+		//監測
+		$("[data-toggle='popover']").on('shown.bs.popover', function (e) {
+			var gid2=e.currentTarget.id;
+			var gid=gid2.substring(6);//截短6個字
+			var name='#'+gid2.substring(1);
+			var pdata = new Object();
+			pdata.database ='<?=$database?>';
+			pdata.gid =gid;
+			pdata.edittext =$(name).val();
+			console.log( pdata ); //測試使用
+			$.post( "ajax/goto_edit.php", pdata, function ( data ) {
+				console.log( data ); //測試使用
+				if ( data.ok ) {
+					//成功
+					$('#'+gid2).popover('destroy');//關掉彈出框
+				} else {
+					//失敗
+					//跳出提示訊息
+					}
+				}, 'json' );
+		
+			
+		});
+});//function END
+</script>                      
+<?php
                     } //有指定資料庫 情況 END
-                    ?>
+?>
                 </div>
             </div>
             <!--./row./col-md-12-->
@@ -377,6 +415,8 @@ if ($database) {
 
 
 			
+				
+
 <?php
 require('_inc/inc_footer_s.php'); //載入表尾
 ?>
@@ -450,8 +490,10 @@ require('_inc/inc_footer_s.php'); //載入表尾
 		$("#upper_right_close").click(function(){
 			$('.l_scroll').animate({"left":-200},500);
 		});
+		
 
-    });
+
+    });//function END
 </script>
 </body>
 </html>
