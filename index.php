@@ -189,7 +189,7 @@ if ($database) {
 		else*/	
 		$classactive='';
 	echo "<li".$classactive.">" . $bn;
-	echo "<a class=\"page-scroll target\" href=\"#" . $c1[$i] . "\">" . $c1[$i] . "</a></td>" . $bn;
+	echo "<a class=\"page-scroll target\" href=\"#" . $c1[$i] . "\">" . $c1[$i] . "</a>" . $bn;
 	echo "</li>" . $bn;
 	}
  }
