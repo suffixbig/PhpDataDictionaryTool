@@ -313,7 +313,7 @@ if ($database) {
                                         <th>表名</th>
                                         <th>別人打的</th>
                                         <th>我打的</th>
-										<th>修改</th>
+										<th class="w50px">修改</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -324,16 +324,15 @@ if ($database) {
                                     $c2 = $tablesB['TABLE_COMMENT0'];//註解
                                     for ($i = 0; $i < count($c1); $i++) {
 									$cid="edit_".$c1[$i];	
-                                        echo "<tr>" . $bn;
+                                        echo "<tr class=\"csssssss\">" . $bn;
                                         echo "<td class=\"cc\">" . ($i + 1) . "</td>" . $bn;
                                         echo "<td><a class=\"page-scroll\" href=\"#" . $c1[$i] . "\">" . $c1[$i] . "</a></td>" . $bn;
                                         echo "<td class=\"c4\">" . _lang($c1[$i], $lang_tablenames) . "</td>" . $bn;
-                                        echo "<td><textarea class=\"w100\" name=\"edit_text\" rows=\"1\" id=\"".$cid."\">" . $c2[$i] . "</textarea></td>" . $bn;//修改
+                                        echo "<td><textarea class=\"w100 h100\" name=\"edit_text\" rows=\"1\" id=\"".$cid."\">" . $c2[$i] . "</textarea></td>" . $bn;//修改
 										echo '<td>';
 echo '										
-<button type="button" class="w100" 
-data-container="body" data-toggle="popover" data-placement="right" 
-data-content="儲存中...." id="b'.$cid.'">
+<button type="button" class="btn5 w50px" 
+data-container="body" data-toggle="popover" data-placement="right" id="b'.$cid.'">
 修改
 </button>';
 													echo '</td>' . $bn;//修改按鈕
@@ -351,7 +350,8 @@ data-content="儲存中...." id="b'.$cid.'">
 <script>        
  $(function() {
 		//工具提示啟用
-		$("[data-toggle='popover']").popover();
+        var scr="儲存中...";
+		$("[data-toggle='popover']").popover({content: scr});
 		//監測
 		$("[data-toggle='popover']").on('shown.bs.popover', function (e) {
 			var gid2=e.currentTarget.id;
@@ -359,22 +359,35 @@ data-content="儲存中...." id="b'.$cid.'">
 			var name='#'+gid2.substring(1);
 			var pdata = new Object();
 			pdata.database ='<?=$database?>';
-			pdata.gid =gid;
+			pdata.tablename =gid;
 			pdata.edittext =$(name).val();
-			console.log( pdata ); //測試使用
+            var el=$(this);
+            el.attr('disabled', 'disabled');//按鈕禁用
+			//console.log( pdata ); //測試使用
 			$.post( "ajax/goto_edit.php", pdata, function ( data ) {
-				console.log( data ); //測試使用
 				if ( data.ok ) {
 					//成功
-					$('#'+gid2).popover('destroy');//關掉彈出框
+                    //console.log(data); //測試使用
+                    setTimeout(function () {
+					el.popover("hide");//關掉彈出框
+                    el.removeAttr('disabled');//按鈕能用
+                    },500);
 				} else {
 					//失敗
-					//跳出提示訊息
+                        //console.log(data.sms); //測試使用
+                        //關鍵不能同一時間2個指令
+                        setTimeout(function () {
+                        $('#'+gid2).popover('destroy');//銷毀
+                        $('#'+gid2).removeAttr('disabled');//按鈕能用
+                            setTimeout(function () {
+                                $('#'+gid2).popover({content :data.sms}).popover('show');//改內容
+                            },500);
+                        },1000);
 					}
 				}, 'json' );
-		
-			
+
 		});
+
 });//function END
 </script>                      
 <?php

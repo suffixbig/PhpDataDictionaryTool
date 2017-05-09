@@ -4,5 +4,5 @@
     "windows": {
         "command": "explorer.exe"
     },
-    "args": ["http://h04.test.com/${relativeFile}"]
+    "args": ["http://test.com/github_cloud/PhpDataDictionaryTool/${relativeFile}"]
 }
