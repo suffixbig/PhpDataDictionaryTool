@@ -325,7 +325,7 @@ if ($database) {
                                     $c1 = $tablesB['TABLE_NAME'];
                                     $c2 = $tablesB['TABLE_COMMENT0'];//註解
                                     for ($i = 0; $i < count($c1); $i++) {
-									$cid="edit_".$c1[$i];	
+									$cid="edit_".$tablesB['TABLE_NAME0'][$i];//用原來的名 ID的規則是不能有點	
                                         echo "<tr class=\"csssssss\">" . $bn;
                                         echo "<td class=\"cc\">" . ($i + 1) . "</td>" . $bn;
                                         echo "<td><a class=\"page-scroll\" href=\"#" . $c1[$i] . "\">" . $c1[$i] . "</a></td>" . $bn;
@@ -351,29 +351,37 @@ data-container="body" data-toggle="popover" data-placement="right" id="b'.$cid.'
                             <?php echo $html; ?> </div>
 <script>        
  $(function() {
+
 		//工具提示啟用
         var scr="儲存中...";
 		$("[data-toggle='popover']").popover({content: scr});
+
+        var storage_status=0;
 		//監測
 		$("[data-toggle='popover']").on('shown.bs.popover', function (e) {
 			var gid2=e.currentTarget.id;
-			var gid=gid2.substring(6);//截短6個字
-			var name='#'+gid2.substring(1);
+            var gid3=gid2.replace(/\./g,"\\.");//如果欄位名中有.這樣可以讓他正常
+			var gid=gid3.substring(6);//截短6個字
+			var name='#'+gid3.substring(1);
+            var edittext=$(name).val();         
+                if(edittext==undefined){
+                     console.log('錯誤'); //測試使用 
+                }
 			var pdata = new Object();
 			pdata.database ='<?=$database?>';
-			pdata.tablename =gid;
-			pdata.edittext =$(name).val();
+			pdata.tablename =gid2.substring(6);//截短6個字
+			pdata.edittext =edittext;
             var el=$(this);
             el.attr('disabled', 'disabled');//按鈕禁用
 			//console.log( pdata ); //測試使用
+    
 			$.post( "ajax/goto_edit.php", pdata, function ( data ) {
 				if ( data.ok ) {
 					//成功 S
                     //console.log(data); //測試使用
                     setTimeout(function () {
-                        el.popover('destroy');//銷毀
+                        //el.popover('destroy');//銷毀
                             setTimeout(function () {
-                                el.popover({content :data.sms}).popover('show');//改內容
                                 setTimeout(function () {
    					            el.popover("hide");//關掉彈出框
                                 el.removeAttr('disabled');//按鈕能用
@@ -389,7 +397,7 @@ data-container="body" data-toggle="popover" data-placement="right" id="b'.$cid.'
                         $('#'+gid2).popover('destroy');//銷毀
                             setTimeout(function () {
                                 $('#'+gid2).popover({content :data.sms}).popover('show');//改內容
-                                $('#'+gid2).removeAttr('disabled');//按鈕能用
+                                //$('#'+gid2).removeAttr('disabled');//按鈕能用
                             },500);
                         },1000);
 					}
@@ -398,6 +406,7 @@ data-container="body" data-toggle="popover" data-placement="right" id="b'.$cid.'
 		});
 
 });//function END
+
 </script>                      
 <?php
                     } //有指定資料庫 情況 END
