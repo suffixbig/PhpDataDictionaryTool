@@ -368,21 +368,28 @@ data-container="body" data-toggle="popover" data-placement="right" id="b'.$cid.'
 			//console.log( pdata ); //測試使用
 			$.post( "ajax/goto_edit.php", pdata, function ( data ) {
 				if ( data.ok ) {
-					//成功
+					//成功 S
                     //console.log(data); //測試使用
                     setTimeout(function () {
-					el.popover("hide");//關掉彈出框
-                    el.removeAttr('disabled');//按鈕能用
+                        el.popover('destroy');//銷毀
+                            setTimeout(function () {
+                                el.popover({content :data.sms}).popover('show');//改內容
+                                setTimeout(function () {
+   					            el.popover("hide");//關掉彈出框
+                                el.removeAttr('disabled');//按鈕能用
+                                },500);   
+                            },500);
                     },500);
+                    //成功 END
 				} else {
 					//失敗
                         //console.log(data.sms); //測試使用
                         //關鍵不能同一時間2個指令
                         setTimeout(function () {
                         $('#'+gid2).popover('destroy');//銷毀
-                        $('#'+gid2).removeAttr('disabled');//按鈕能用
                             setTimeout(function () {
                                 $('#'+gid2).popover({content :data.sms}).popover('show');//改內容
+                                $('#'+gid2).removeAttr('disabled');//按鈕能用
                             },500);
                         },1000);
 					}
