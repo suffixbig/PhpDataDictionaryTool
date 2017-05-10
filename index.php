@@ -33,10 +33,12 @@ if (isset($_GET['prefix'])) {
 }
 $db_namec = '數據/資料庫字典生成工具';
 /***********************************************************************************************/
-$dblink = _mysql_open(); //開資料庫連線================================================
+
+$db = new Api_mysqli;
+$dblink = $db->mysql_open(); //開資料庫連線================================================
 //mysql_list_dbs --- 列出 MySQL 伺服器上可用的資料庫
 $sql = 'SHOW DATABASES';
-$DATANAME = row_sql_a($sql, $dblink);
+$DATANAME = $db->row_sql_a($sql, $dblink);
 
 
 if(count($ok_show_databases)>0){
@@ -60,7 +62,7 @@ $DATANAME = $DATANAME2;
 //===========================================================
 if (isset($_GET['DATANAME'])) {
     $database = $_GET['DATANAME'];
-    mysqluse($dblink, $database); //切換資料庫
+    $db->mysqluse($database,$dblink); //切換資料庫
 }
 
 
@@ -68,7 +70,7 @@ if (isset($_GET['DATANAME'])) {
 //有指定資料庫 情況 S
 if ($database) {
     $sql = 'show tables';
-    $tablesaaa = row_sql_a($sql, $dblink);
+    $tablesaaa = $db->row_sql_a($sql, $dblink);
 //過濾不需要顯示的表名
     for ($i = 0; $i < count($tablesaaa); $i++) {
         if (!in_array($tablesaaa[$i], $no_show_databases)) {
@@ -92,7 +94,7 @@ if ($database) {
 		$sql .= 'INFORMATION_SCHEMA.TABLES ';
 		$sql .= 'WHERE ';
 		$sql .= "table_name = '{$v['TABLE_NAME']}'  AND table_schema = '{$database}'";
-		$tables[$k]['TABLE_COMMENT'] =row_sql1p($sql, 0, $dblink);
+		$tables[$k]['TABLE_COMMENT'] =$db->row_sql1p($sql, 0, $dblink);
 /*
 print_r($tables);
 exit;
@@ -104,12 +106,12 @@ exit;
         $sql .= 'WHERE ';
         $sql .= "table_name = '{$v['TABLE_NAME']}' AND table_schema = '{$database}'";
 
-        $fields = assoc_sql($sql, $dblink);
+        $fields = $db->assoc_sql($sql, $dblink);
         $tables[$k]['COLUMN'] = $fields;//子表內容
     }
 //有指定資料庫 情況 END
 }
-_mysql_close($dblink); //關資料庫==============================================================
+$db->mysql_close($dblink); //關資料庫==============================================================
 
 /***********************************************************************************************/
 

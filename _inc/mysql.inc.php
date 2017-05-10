@@ -3,8 +3,10 @@
 /*
  * 試用PHP7.0
  */
+class Api_mysqli{
+
 //開資料庫-預設開啟資料庫
-function _mysql_open($table_db = '')
+public function mysql_open($table_db = '')
 {
     global $cfg;
     $i = $cfg['servers']['y'];
@@ -26,28 +28,28 @@ function _mysql_open($table_db = '')
     }
     return $mysqli;
 }
-
+//原則資料庫連線在後面
 //關資料庫
-function _mysql_close($dblink = '')
+public function mysql_close($dblink = '')
 {
     mysqli_close($dblink);
 }
 
 //執行SQL
-function _sql($dblink, $sql)
+public function _sql($sql,$dblink)
 {
     $ok = mysqli_query($dblink, $sql) or die("error 單行查詢錯誤: " . $sql); //帶入查詢語法;
 }
 
 //切換資料庫
-function mysqluse($dblink, $db)
+public function mysqluse($db,$dblink)
 {
-    _sql($dblink, "USE `" . $db . "`");
+    $this->_sql("USE `" . $db . "`", $dblink);//呼叫自己
 }
 
 
 //以IN查資料 給陣列變為要入SQL的字-----這段不一樣注意注意
-function idgroup($array = array())
+public function idgroup($array = array())
 {
     if (empty($array)) {
         return "IN(0)"; //沒資料不查
@@ -71,7 +73,7 @@ function idgroup($array = array())
 
 
 //不連結資料庫-以欄名建立二維陣列
-function assoc_sql($sql, $dblink)
+public function assoc_sql($sql, $dblink)
 {
 	$array=array();
     $result = mysqli_query($dblink, $sql) or die("error 單行查詢錯誤: " . $sql); //帶入查詢語法;
@@ -84,7 +86,7 @@ function assoc_sql($sql, $dblink)
 }
 
 //不連結資料庫-以攔名建立一維陣列(單行)
-function assoc_sql1p($sql, $dblinkID = "")
+public function assoc_sql1p($sql, $dblinkID = "")
 {
     if ($dblinkID) {
         $str = mysqli_query($dblinkID, $sql) or die("error 單行查詢錯誤: " . $sql); //帶入查詢語法;
@@ -96,7 +98,7 @@ function assoc_sql1p($sql, $dblinkID = "")
 }
 
 //不連結資料庫--以數字建立二維陣列
-function row_sql($sql, $dblinkID = "")
+public function row_sql($sql, $dblinkID = "")
 {
     if ($dblinkID) {
         $result = mysqli_query($dblinkID, $sql) or die("error 單行查詢錯誤: " . $sql); //帶入查詢語法;
@@ -112,7 +114,7 @@ function row_sql($sql, $dblinkID = "")
 }
 
 //不連結資料庫--以數字建立1維陣列-只取該列第1欄
-function row_sql_a($sql, $dblinkID = "")
+public function row_sql_a($sql, $dblinkID = "")
 {
     if ($dblinkID) {
         $result = mysqli_query($dblinkID, $sql) or die("error 單行查詢錯誤: " . $sql); //帶入查詢語法;
@@ -128,7 +130,7 @@ function row_sql_a($sql, $dblinkID = "")
 }
 
 //不連結資料庫-只取一個答案 注意用法3個參數都要
-function row_sql1p($sql, $s = 0, $dblinkID = "")
+public function row_sql1p($sql, $s = 0, $dblinkID = "")
 {
     $str = mysqli_query($dblinkID, $sql) or die("error 單行查詢錯誤: " . $sql); //帶入查詢語法;
     $row = mysqli_fetch_row($str); //抄下符合名稱那一排的資料
@@ -136,15 +138,18 @@ function row_sql1p($sql, $s = 0, $dblinkID = "")
 }
 
 //修改資料
-function mysql_up($sql, $dblinkID)
+public function mysql_up($sql, $dblinkID)
 {
     $str = mysqli_query($dblinkID, $sql) or die("error -1: " . $sql); //帶入查詢語法;
     return $str;
 }
 
 //新增資料
-function mysql_insert($sql, $dblinkID)
+public function mysql_insert($sql, $dblinkID)
 {
     $str = mysqli_query($dblinkID, $sql); //帶入查詢語法;
     return $str; //成功會是1 失敗會返回空
+}
+
+//END
 }
