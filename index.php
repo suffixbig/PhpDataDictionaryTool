@@ -24,6 +24,7 @@ require_once INCLUDE_PATH . "/global_suffix.php"; // 載入資料庫函式
 /***********************************************************************************************/
 $typenamech2 = array('單個表列出', '全表列出', '自由拖拉');
 $i_my = '後台';
+$db_namec = '數據/資料庫字典生成工具';
 
 $_GET['prefix'] = 'oc_'; //替換所有的表前綴
 if (isset($_GET['prefix'])) {
@@ -31,7 +32,7 @@ if (isset($_GET['prefix'])) {
 } else {
     $prefix = "";
 }
-$db_namec = '數據/資料庫字典生成工具';
+
 /***********************************************************************************************/
 
 $db = new Api_mysqli;
@@ -64,8 +65,6 @@ if (isset($_GET['DATANAME'])) {
     $database = $_GET['DATANAME'];
     $db->mysqluse($database, $dblink); //切換資料庫
 }
-
-
 //===========================================================
 //有指定資料庫 情況 S
 if ($database) {
@@ -95,10 +94,6 @@ if ($database) {
         $sql .= 'WHERE ';
         $sql .= "table_name = '{$v['TABLE_NAME']}'  AND table_schema = '{$database}'";
         $tables[$k]['TABLE_COMMENT'] =$db->row_sql1p($sql, 0, $dblink);
-/*
-print_r($tables);
-exit;
-*/
         //取得各表的每一欄註解
         //==============================================================
         $sql = 'SELECT * FROM ';
@@ -112,19 +107,9 @@ exit;
 //有指定資料庫 情況 END
 }
 $db->mysql_close($dblink); //關資料庫==============================================================
-
 /***********************************************************************************************/
 
-/*
-註解切割完畢
-*/
-/*
-print_r($tablesB);
-exit;
-*/
-
 $html = ''; //循環所有表
-
 //有指定資料庫 情況 S
 if ($database) {
     foreach ($tables as $k => $v) {
@@ -134,9 +119,7 @@ if ($database) {
         } else {
             $TABLE_NAME = $v['TABLE_NAME'];
         }
-
         $b = cut_annotations($TABLE_NAME, $v['TABLE_COMMENT']); //參數英文名和註解
-
         //重整出 標題名
         $tablesB['TABLE_NAME0'][] = $v['TABLE_NAME'];   //放表英文名未取代字串前
         $tablesB['TABLE_NAME'][] =  $b['TABLE_NAME'];   //放表英文名
@@ -144,12 +127,10 @@ if ($database) {
         $tablesB['TABLE_COMMENT2'][] = $b['TABLE_COMMENT2']; //註解
         $tablesB['TABLE_COMMENT0'][] = $v['TABLE_COMMENT']; //註解 為拆解前
     }
-
-
     foreach ($tables as $k => $v) {
         //重複程式碼
-        //參數$html,$tablesB=有放註解的數組,$k=第幾個,$v=表的各欄值
-        $html=combination_of_content($html, $tablesB, $k, $v);
+        //參數$html,$tablesB=有放註解的數組,$k=第幾個,$v=表的各欄值,$editok=1編輯開關
+        $html=combination_of_content($html,$tablesB,$k,$v,0);
     }
 //有指定資料庫 情況 END
 }
@@ -167,6 +148,8 @@ require(INCLUDE_PATH . '/inc_head.php'); //載入表頭
 <link rel="stylesheet" href="skin/js/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- 可選的Bootstrap主題文件（一般不用引入） 
 <link rel="stylesheet" href="/skin/js/bootstrap/3.3.7/css/bootstrap-theme.min.css">-->
+<!-- 字體圖示 -->
+<link rel="stylesheet" href="skin/css/font-awesome.min.css">
 <!-- 本頁專用 -->
 <link href="skin/css/admin.css" rel="stylesheet">
 </head>
@@ -279,7 +262,7 @@ if ($database) {
                     </div>
                     <!--下拉跳網址 END-->
                     <hr>
-                    <div id="div_home2"></div>
+                    <div id="div_home1"></div>
 
                 </div>
             </div>
@@ -300,8 +283,7 @@ if ($database) {
                     if ($database) {
                         ?>
                         <h1 style="text-align:center;">
-                            <?= $database ?>
-                            數據庫字典</h1>
+                            <?= $database ?>數據庫字典</h1>
                         <hr>
                         <!--響應式表格-->
                         <div class="generallist">
@@ -330,13 +312,8 @@ if ($database) {
                                         echo "<td class=\"c4\">" . _lang($c1[$i], $lang_tablenames) . "</td>" . $bn;
                                         echo "<td><textarea class=\"w100 h100\" name=\"edit_text\" rows=\"1\" id=\"".$cid."\">" . $c2[$i] . "</textarea></td>" . $bn;//修改
                                         echo '<td>';
-                                        echo '										
-<button type="button" class="btn5 w50px" 
-data-container="body" data-toggle="popover" data-placement="right" id="b'.$cid.'">
-修改
-</button>';
-                                                    echo '</td>' . $bn;//修改按鈕
-                                        
+                                        echo '<button type="button" class="btn5 w50px" data-container="body" data-toggle="popover" data-placement="right" id="b'.$cid.'">修改</button>';
+                                        echo '</td>' . $bn;//修改按鈕END
                                         echo "</tr>" . $bn;
                                     }
                                     ?>
@@ -345,8 +322,13 @@ data-container="body" data-toggle="popover" data-placement="right" id="b'.$cid.'
                             </div>
                         </div>
                         <hr>
-                        <div class="warp">
-                            <?php echo $html; ?> </div>
+                        <h1><a href="javascript:replace_editing();">以下可否編輯切換 <i class="icon-pencil text_shadow"></i></a> <=點我</h1>
+                        <hr>
+                        <div id="div_home2">
+                            <div class="warp" >
+                            <?php echo $html; ?>
+                            </div>
+                        </div>
 <script> 
  $(function() {
 
@@ -508,7 +490,7 @@ require('_inc/inc_footer_s.php'); //載入表尾
             var url = $(this).val(); // get selected value
             if (url) {
                 //window.location = url; // redirect
-                $("#div_home2").load("ajax/goto_datasheet.php?database=<?=$database?>&tablename=" + url);
+                $("#div_home1").load("ajax/goto_datasheet.php?database=<?=$database?>&tablename=" + url);
 
             }
             return false;
@@ -534,6 +516,17 @@ require('_inc/inc_footer_s.php'); //載入表尾
 
 
     });//function END
+//可編輯不可編輯切換
+var $replace_editing=0;
+function replace_editing(){
+    if($replace_editing){
+    $("#div_home2").load("ajax/goto_datasheet.php?database=<?=$database?>&tablename=1&powerswitch=b&prefix=<?$prefix?>");//全顯不可編輯
+    $replace_editing=0;
+    }else{
+    $("#div_home2").load("ajax/goto_datasheet.php?database=<?=$database?>&tablename=1&powerswitch=a&prefix=<?$prefix?>");//全顯可編輯
+    $replace_editing=1;
+    }    
+}  
 </script>
 </body>
 </html>

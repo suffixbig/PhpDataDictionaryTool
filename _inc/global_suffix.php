@@ -592,9 +592,11 @@ function cut_annotations($TABLE_NAME, $TABLE_COMMENT)
 }
 
 //重複程式碼
-//參數$html,$tablesB=有放註解的數組,$k=第幾個,$v=表的各欄值 全域要載入global $lang_columntype;//翻譯文字
-function combination_of_content($html,$tablesB,$k,$v){
+//參數$html,$tablesB=有放註解的數組,$k=第幾個,$v=表的各欄值,$editok=1編輯開關
+//全域要載入global $lang_columntype;//翻譯文字
+function combination_of_content($html,$tablesB,$k,$v,$editok){
 global $lang_columntype;//翻譯文字
+        $bn="\n";
 	    $TABLE_NAME = $tablesB['TABLE_NAME'][$k];//表英文名修改後
    		//顯示第1行字標題
         $html .= '<a name="' . $TABLE_NAME . '" id="' . $TABLE_NAME . '">'; //id
@@ -604,7 +606,7 @@ global $lang_columntype;//翻譯文字
         	if(count($tablesB[ 'TABLE_NAME' ])>1){
         	$html .=($k + 1) . '、'	;
 			}
-        $html .= $tablesB['TABLE_COMMENT1'][$k] . '  （<span class="cr">' . $TABLE_NAME . '</span>）</h2>' . "\n"; //標題
+        $html .= $tablesB['TABLE_COMMENT1'][$k] . '  （<span class="cr">' . $TABLE_NAME . '</span>）</h2>' .$bn; //標題
         //顯示第2行字註解
         if ($tablesB['TABLE_COMMENT2'][$k]) {
             $html .= '<div><h3>';
@@ -612,24 +614,27 @@ global $lang_columntype;//翻譯文字
             $html .= '</h3></div>';
         }
 
-        $html .= '<table border="1" cellspacing="0" cellpadding="0" width="100%" class="table table-striped table-bordered" >' . "\n";
-        $html .= '		<tbody>' . "\n";
-        $html .= '			<tr>' . "\n";
-        $html .= '				<th>字段名</th>' . "\n";
-        $html .= '				<th>數據類型</th>' . "\n";
-        $html .= '				<th>數據類型</th>' . "\n";
-        $html .= '				<th>長度</th>' . "\n";
-        $html .= '				<th>默認值</th>' . "\n";
-        $html .= '				<th>允許非空</th>' . "\n";
-        $html .= '				<th>主鍵</th>' . "\n";
-        $html .= '				<th>備註</th>' . "\n";
-        $html .= '			</tr>' . "\n";
+        $html .= '<table border="1" cellspacing="0" cellpadding="0" width="100%" class="table table-striped table-bordered" >' .$bn;
+        $html .= '		<tbody>' .$bn;
+        $html .= '			<tr>' .$bn;
+        $html .= '				<th>字段名</th>' .$bn;
+        $html .= '				<th>數據類型</th>' .$bn;
+        $html .= '				<th>數據類型</th>' .$bn;
+        $html .= '				<th>長度</th>' .$bn;
+        $html .= '				<th>默認值</th>' .$bn;
+        $html .= '				<th>允許非空</th>' .$bn;
+        $html .= '				<th>主鍵</th>' .$bn;
+        $html .= '				<th>備註</th>' .$bn;
+            if($editok){
+            $html .= '				<th class="w50px">編輯</th>' .$bn;
+            }
+        $html .= '			</tr>' .$bn;
         //表的值COLUMN
         foreach ($v['COLUMN'] as $f) {
-            $html .= '			<tr>' . "\n";
-            $html .= '				<td class="c1">' . $f['COLUMN_NAME'] . '</td>' . "\n";
-            $html .= '				<td class="c2">' . _lang($f['DATA_TYPE'], $lang_columntype) . '</td>' . "\n";
-            $html .= '				<td class="c0c">' . $f['DATA_TYPE'] . '</td>' . "\n";
+            $html .= '			<tr class="csssssss">' .$bn;
+            $html .= '				<td class="c1">' . $f['COLUMN_NAME'] . '</td>' .$bn;
+            $html .= '				<td class="c2">' . _lang($f['DATA_TYPE'], $lang_columntype) . '</td>' .$bn;
+            $html .= '				<td class="c0c">' . $f['DATA_TYPE'] . '</td>' .$bn;
             //長度
             $LENGTH = "";
             if ($f['NUMERIC_PRECISION']) {
@@ -639,15 +644,25 @@ global $lang_columntype;//翻譯文字
                     $LENGTH = $f['CHARACTER_OCTET_LENGTH'];
                 }
             }
-            $html .= '				<td class="c0c">' . $LENGTH . '</td>' . "\n";
-            $html .= '				<td class="c0c">' . $f['COLUMN_DEFAULT'] . '</td>' . "\n";
-            $html .= '				<td class="c0c">' . $f['IS_NULLABLE'] . '</td>' . "\n";
-            $html .= '				<td class="c5">' . $f['COLUMN_KEY'] . ($f['EXTRA'] == 'auto_increment' ? '+自增' : '&nbsp;') . '</td>' . "\n";
-            $html .= '				<td class="c6">' . $f['COLUMN_COMMENT'] . '</td>' . "\n";
-            $html .= '			</tr>' . "\n";
+            $html .= '				<td class="c0c">' . $LENGTH . '</td>' .$bn;
+            $html .= '				<td class="c0c">' . $f['COLUMN_DEFAULT'] . '</td>' .$bn;
+            $html .= '				<td class="c0c">' . $f['IS_NULLABLE'] . '</td>' .$bn;
+            $html .= '				<td class="c5">' . $f['COLUMN_KEY'] . ($f['EXTRA'] == 'auto_increment' ? '+自增' : '&nbsp;') . '</td>' .$bn;
+            if($editok){
+            //編輯**************************************************************************************
+            $cid="gyit_".$tablesB['TABLE_NAME0'][$k].$f['COLUMN_NAME'];//ID名規則 //放表英文名未取代字串前+欄位名
+                $html .= "<td><textarea class=\"w100 h100\" name=\"edit_text\" rows=\"1\" id=\"".$cid."\">" . $f['COLUMN_COMMENT'] . "</textarea></td>" . $bn;//修改
+                $html .= '<td>';
+                $html .= '<button type="button" class="btn5 w50px" data-container="body" data-toggle="popover" data-placement="right" id="b'.$cid.'">修改</button>';
+                $html .= '</td>' . $bn;//修改按鈕END
+            }else{
+                $html .= '				<td class="c6">' . $f['COLUMN_COMMENT'] . '</td>' .$bn;//不編輯
+            }
+            //編輯END**************************************************************************************
+            $html .= '			</tr>' .$bn;
         }
-        $html .= '		</tbody>' . "\n";
-        $html .= '	</table>' . "\n";
+        $html .= '		</tbody>' .$bn;
+        $html .= '	</table>' .$bn;
         return $html;
 }
 ?>
