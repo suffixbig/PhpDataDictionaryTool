@@ -15,8 +15,8 @@ $thisDir = "."; //config.inc.php檔的相對路徑
 $_file = basename(__FILE__); //自行取得本程式名稱
 require($thisDir . "/config.inc.php"); // 載入主參數設定檔
 require($thisDir . "/config.inc.mysql.php"); //載入資料庫帳號
-if(background_switch){
-require(INCLUDE_PATH . "/inc_password.php"); // 載入密碼登入系統
+if (background_switch) {
+    require(INCLUDE_PATH . "/inc_password.php"); // 載入密碼登入系統
 } else {
 }
 require_once INCLUDE_PATH . "/mysql.inc.php"; // 載入資料庫函式
@@ -41,28 +41,28 @@ $sql = 'SHOW DATABASES';
 $DATANAME = $db->row_sql_a($sql, $dblink);
 
 
-if(count($ok_show_databases)>0){
-	//只顯示清單上的資料庫
-	for ($i = 0; $i < count($DATANAME); $i++) {
-		if (in_array($DATANAME[$i], $ok_show_databases)) {
-			$DATANAME2[] = $DATANAME[$i];
-		}
-	}
-}else{
-	//或是
-	//過濾不需要顯示的數據庫
-	for ($i = 0; $i < count($DATANAME); $i++) {
-		if (!in_array($DATANAME[$i], $no_show_databases)) {
-			$DATANAME2[] = $DATANAME[$i];
-		}
-	}
+if (count($ok_show_databases)>0) {
+    //只顯示清單上的資料庫
+    for ($i = 0; $i < count($DATANAME); $i++) {
+        if (in_array($DATANAME[$i], $ok_show_databases)) {
+            $DATANAME2[] = $DATANAME[$i];
+        }
+    }
+} else {
+    //或是
+    //過濾不需要顯示的數據庫
+    for ($i = 0; $i < count($DATANAME); $i++) {
+        if (!in_array($DATANAME[$i], $no_show_databases)) {
+            $DATANAME2[] = $DATANAME[$i];
+        }
+    }
 }
 $DATANAME = $DATANAME2;
 
 //===========================================================
 if (isset($_GET['DATANAME'])) {
     $database = $_GET['DATANAME'];
-    $db->mysqluse($database,$dblink); //切換資料庫
+    $db->mysqluse($database, $dblink); //切換資料庫
 }
 
 
@@ -86,20 +86,20 @@ if ($database) {
         }
         //echo "替換表前綴" . $prefix . "替換成功！";
     }
-	
+    
 //循環取得所有表的備註及表中列消息
     foreach ($tables as $k => $v) {
-		//取得各表註解
-		$sql = 'SELECT TABLE_COMMENT FROM ';
-		$sql .= 'INFORMATION_SCHEMA.TABLES ';
-		$sql .= 'WHERE ';
-		$sql .= "table_name = '{$v['TABLE_NAME']}'  AND table_schema = '{$database}'";
-		$tables[$k]['TABLE_COMMENT'] =$db->row_sql1p($sql, 0, $dblink);
+        //取得各表註解
+        $sql = 'SELECT TABLE_COMMENT FROM ';
+        $sql .= 'INFORMATION_SCHEMA.TABLES ';
+        $sql .= 'WHERE ';
+        $sql .= "table_name = '{$v['TABLE_NAME']}'  AND table_schema = '{$database}'";
+        $tables[$k]['TABLE_COMMENT'] =$db->row_sql1p($sql, 0, $dblink);
 /*
 print_r($tables);
 exit;
 */
-		//取得各表的每一欄註解
+        //取得各表的每一欄註解
         //==============================================================
         $sql = 'SELECT * FROM ';
         $sql .= 'INFORMATION_SCHEMA.COLUMNS ';
@@ -127,9 +127,7 @@ $html = ''; //循環所有表
 
 //有指定資料庫 情況 S
 if ($database) {
-
     foreach ($tables as $k => $v) {
-
         //如果有替換所有表的表前綴的行為
         if ($prefix) {
             $TABLE_NAME = $tables2[$k]['TABLE_NAME']; //表名
@@ -140,18 +138,18 @@ if ($database) {
         $b = cut_annotations($TABLE_NAME, $v['TABLE_COMMENT']); //參數英文名和註解
 
         //重整出 標題名
-		$tablesB['TABLE_NAME0'][] = $v['TABLE_NAME']; 	//放表英文名未取代字串前
-        $tablesB['TABLE_NAME'][] =  $b['TABLE_NAME'];	//放表英文名
+        $tablesB['TABLE_NAME0'][] = $v['TABLE_NAME'];   //放表英文名未取代字串前
+        $tablesB['TABLE_NAME'][] =  $b['TABLE_NAME'];   //放表英文名
         $tablesB['TABLE_COMMENT1'][] = $b['TABLE_COMMENT1']; //中文
         $tablesB['TABLE_COMMENT2'][] = $b['TABLE_COMMENT2']; //註解
-		$tablesB['TABLE_COMMENT0'][] = $v['TABLE_COMMENT']; //註解 為拆解前	
+        $tablesB['TABLE_COMMENT0'][] = $v['TABLE_COMMENT']; //註解 為拆解前
     }
 
 
     foreach ($tables as $k => $v) {
-		//重複程式碼
-		//參數$html,$tablesB=有放註解的數組,$k=第幾個,$v=表的各欄值
-		$html=combination_of_content($html,$tablesB,$k,$v);
+        //重複程式碼
+        //參數$html,$tablesB=有放註解的數組,$k=第幾個,$v=表的各欄值
+        $html=combination_of_content($html, $tablesB, $k, $v);
     }
 //有指定資料庫 情況 END
 }
@@ -173,33 +171,33 @@ require(INCLUDE_PATH . '/inc_head.php'); //載入表頭
 <link href="skin/css/admin.css" rel="stylesheet">
 </head>
 <body data-spy="scroll" data-target="#navbar-fixed-top" data-offset="20">
-	
+    
 <!--滾動監聽 S-->
 <div class="l_scroll">
 <div class="upper_right" id="upper_right_close"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></div>
-		<nav id="navbar-fixed-top">
-			<div class="l_scroll-fluid">
-			<ul class="nav nav-pills nav-stacked">
-				
+        <nav id="navbar-fixed-top">
+            <div class="l_scroll-fluid">
+            <ul class="nav nav-pills nav-stacked">
+                
 <?php
 //有指定資料庫 情況 S
 if ($database) {
-	$c1 = $tablesB['TABLE_NAME'];
+    $c1 = $tablesB['TABLE_NAME'];
     for ($i = 0; $i < count($c1); $i++) {
-		/*
+        /*
 		if($i==0)
 		$classactive=' class="active"';
-		else*/	
-		$classactive='';
-	echo "<li".$classactive.">" . $bn;
-	echo "<a class=\"page-scroll target\" href=\"#" . $c1[$i] . "\">" . $c1[$i] . "</a>" . $bn;
-	echo "</li>" . $bn;
-	}
- }
- ?>
-			</ul>
-			</div>		
-		</nav>
+		else*/
+        $classactive='';
+        echo "<li".$classactive.">" . $bn;
+        echo "<a class=\"page-scroll target\" href=\"#" . $c1[$i] . "\">" . $c1[$i] . "</a>" . $bn;
+        echo "</li>" . $bn;
+    }
+}
+    ?>
+            </ul>
+            </div>      
+        </nav>
 
 </div>	
 <!--滾動監聽 END-->
@@ -270,7 +268,7 @@ if ($database) {
                                 $b2 = $tablesB['TABLE_NAME0'];
                                 foreach ($b2 as $k => $v) {
                                     $selected = "";
-									//注意這裡一定要使用原來的表名
+                                    //注意這裡一定要使用原來的表名
                                     echo "<option value=\"". $v . "\" " . $selected . " >" . $v . "</option>";
                                 }
                                 ?>
@@ -315,7 +313,7 @@ if ($database) {
                                         <th>表名</th>
                                         <th>別人打的</th>
                                         <th>我打的</th>
-										<th class="w50px">修改</th>
+                                        <th class="w50px">修改</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -325,20 +323,20 @@ if ($database) {
                                     $c1 = $tablesB['TABLE_NAME'];
                                     $c2 = $tablesB['TABLE_COMMENT0'];//註解
                                     for ($i = 0; $i < count($c1); $i++) {
-									$cid="edit_".$tablesB['TABLE_NAME0'][$i];//用原來的名 ID的規則是不能有點	
+                                        $cid="edit_".$tablesB['TABLE_NAME0'][$i];//用原來的名 ID的規則是不能有點
                                         echo "<tr class=\"csssssss\">" . $bn;
                                         echo "<td class=\"cc\">" . ($i + 1) . "</td>" . $bn;
                                         echo "<td><a class=\"page-scroll\" href=\"#" . $c1[$i] . "\">" . $c1[$i] . "</a></td>" . $bn;
                                         echo "<td class=\"c4\">" . _lang($c1[$i], $lang_tablenames) . "</td>" . $bn;
                                         echo "<td><textarea class=\"w100 h100\" name=\"edit_text\" rows=\"1\" id=\"".$cid."\">" . $c2[$i] . "</textarea></td>" . $bn;//修改
-										echo '<td>';
-echo '										
+                                        echo '<td>';
+                                        echo '										
 <button type="button" class="btn5 w50px" 
 data-container="body" data-toggle="popover" data-placement="right" id="b'.$cid.'">
 修改
 </button>';
-													echo '</td>' . $bn;//修改按鈕
-										
+                                                    echo '</td>' . $bn;//修改按鈕
+                                        
                                         echo "</tr>" . $bn;
                                     }
                                     ?>
@@ -349,62 +347,73 @@ data-container="body" data-toggle="popover" data-placement="right" id="b'.$cid.'
                         <hr>
                         <div class="warp">
                             <?php echo $html; ?> </div>
-<script>        
+<script> 
  $(function() {
 
-		//工具提示啟用
-        var scr="儲存中...";
-		$("[data-toggle='popover']").popover({content: scr});
-
-        var storage_status=0;
-		//監測
-		$("[data-toggle='popover']").on('shown.bs.popover', function (e) {
-			var gid2=e.currentTarget.id;
+        //工具提示啟用
+        $("[data-toggle='popover']").popover({html: true,content:function (e){
+            var s=$(this).attr('id');
+            return '<div id="popoverid_'+s+'">儲存中...</div>';
+            }
+        });
+        
+        //var storage_status=0;
+        //監測
+        $("[data-toggle='popover']").on('shown.bs.popover', function (e) {
+        //if (storage_status==0){
+            var gid2=e.currentTarget.id;
             var gid3=gid2.replace(/\./g,"\\.");//如果欄位名中有.這樣可以讓他正常
-			var gid=gid3.substring(6);//截短6個字
-			var name='#'+gid3.substring(1);
+            var gid=gid3.substring(6);//截短6個字
+            var name='#'+gid3.substring(1);
             var edittext=$(name).val();         
                 if(edittext==undefined){
                      console.log('錯誤'); //測試使用 
                 }
-			var pdata = new Object();
-			pdata.database ='<?=$database?>';
-			pdata.tablename =gid2.substring(6);//截短6個字
-			pdata.edittext =edittext;
+            var pdata = new Object();
+            pdata.database ='<?=$database?>';
+            pdata.tablename =gid2.substring(6);//截短6個字
+            pdata.edittext =edittext;
             var el=$(this);
             el.attr('disabled', 'disabled');//按鈕禁用
-			//console.log( pdata ); //測試使用
-    
-			$.post( "ajax/goto_edit.php", pdata, function ( data ) {
-				if ( data.ok ) {
-					//成功 S
-                    //console.log(data); //測試使用
+            //console.log( pdata ); //測試使用
+            //storage_status++;
+            $.post( "ajax/goto_edit.php", pdata, function ( data ) {
+                if ( data.ok ) {
+                    //成功 S
+                    console.log(data); //測試使用
                     setTimeout(function () {
                         //el.popover('destroy');//銷毀
+                        //el.popover("hide");//關掉彈出框
+                        //el.popover({content :data.sms});//改內容
+                        $('#popoverid_'+gid2).text(data.sms);//改內容
                             setTimeout(function () {
+                            el.popover("hide");//關掉彈出框    
                                 setTimeout(function () {
-   					            el.popover("hide");//關掉彈出框
                                 el.removeAttr('disabled');//按鈕能用
-                                },500);   
+                                //storage_status=0;//恢復監聽
+                                },200);   
                             },500);
                     },500);
                     //成功 END
-				} else {
-					//失敗
+                } else {
+                    //失敗
                         //console.log(data.sms); //測試使用
                         //關鍵不能同一時間2個指令
                         setTimeout(function () {
-                        $('#'+gid2).popover('destroy');//銷毀
+                        $('#popoverid_'+gid2).text(data.sms);//改內容
                             setTimeout(function () {
-                                $('#'+gid2).popover({content :data.sms}).popover('show');//改內容
-                                //$('#'+gid2).removeAttr('disabled');//按鈕能用
-                            },500);
-                        },1000);
-					}
-				}, 'json' );
-
-		});
-
+                            el.popover("hide");//關掉彈出框    
+                                setTimeout(function () {
+                                el.removeAttr('disabled');//按鈕能用
+                                //storage_status=0;//恢復監聽
+                                },200);   
+                            },700);
+                        },500);
+                    }
+                }, 'json' );
+       // }//storage_status if END
+        });
+       
 });//function END
 
 </script>                      
@@ -445,15 +454,15 @@ data-container="body" data-toggle="popover" data-placement="right" id="b'.$cid.'
 
 
 
-			
-				
+            
+                
 
 <?php
 require('_inc/inc_footer_s.php'); //載入表尾
 ?>
 <script src="skin/js/jquery.cookie.min.js" type="text/javascript"></script>
 <!--jqueryui-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 <script type="text/javascript">
     //重整
     function locationabc() {
@@ -505,23 +514,23 @@ require('_inc/inc_footer_s.php'); //載入表尾
             return false;
         });
 
-		//--滾動監聽使用內建功能-->
-		
-		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        //--滾動監聽使用內建功能-->
+        
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             // 獲取已激活的標籤頁的名稱
             var activeTab = $(e.target).text();
             // 獲取前一個激活的標籤頁的名稱
             var previousTab = $(e.relatedTarget).text();
-				if(activeTab=='全表列出')
-					$('.l_scroll').animate({"left":0},500);
-				else
-					$('.l_scroll').animate({"left":-200},500);
+                if(activeTab=='全表列出')
+                    $('.l_scroll').animate({"left":0},500);
+                else
+                    $('.l_scroll').animate({"left":-200},500);
         });
-		//關閉按鈕
-		$("#upper_right_close").click(function(){
-			$('.l_scroll').animate({"left":-200},500);
-		});
-		
+        //關閉按鈕
+        $("#upper_right_close").click(function(){
+            $('.l_scroll').animate({"left":-200},500);
+        });
+        
 
 
     });//function END
