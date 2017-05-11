@@ -356,7 +356,7 @@ data-container="body" data-toggle="popover" data-placement="right" id="b'.$cid.'
             return '<div id="popoverid_'+s+'">儲存中...</div>';
             }
         });
-        
+         
         //var storage_status=0;
         //監測
         $("[data-toggle='popover']").on('shown.bs.popover', function (e) {
