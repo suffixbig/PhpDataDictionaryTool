@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <title>數據字典-後台</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--ico-->
+    <!-- favorite icon starts -->
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <!--<link rel="shortcut icon" href="/icon.png" type="image/x-icon" />-->
+    <link rel="apple-touch-icon" href="/AppIcon.png" />
+    <!-- favorite icon ends -->
+    <meta name="keywords" lang="zh-TW" content="">
+    <meta name="description" content="">
+    <!-- jQuery文件。務必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- 字體圖示-->
+    <link rel="stylesheet" href="../skin/css/font-awesome.min.css">
+    <!-- 本頁專用 -->
+    <link href="../skin/css/admin.css" rel="stylesheet">
+</head>
+
+<body data-spy="scroll" data-target="#navbar-fixed-top" data-offset="20">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1>Tooltip 效果</h1>
+
+                <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Tooltip on left">Tooltip on left</button>
+                <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Tooltip on top">Tooltip on top</button>
+                <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">Tooltip on bottom</button>
+                <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Tooltip on right">Tooltip on right</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <hr>
+                <div class="bs-example bs-example-tooltip" data-example-id="static-tooltips">
+                    <div class="tooltip left" role="tooltip">
+                        <div class="tooltip-arrow"></div>
+                        <div class="tooltip-inner">
+                            Tooltip on the left
+                        </div>
+                    </div>
+                    <div class="tooltip top" role="tooltip">
+                        <div class="tooltip-arrow"></div>
+                        <div class="tooltip-inner">
+                            Tooltip on the top
+                        </div>
+                    </div>
+                    <div class="tooltip bottom" role="tooltip">
+                        <div class="tooltip-arrow"></div>
+                        <div class="tooltip-inner">
+                            Tooltip on the bottom
+                        </div>
+                    </div>
+                    <div class="tooltip right" role="tooltip">
+                        <div class="tooltip-arrow"></div>
+                        <div class="tooltip-inner">
+                            Tooltip on the right
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    //載入完就啟用 開始*****************************/
+    $(function() {
+        
+        $('[data-toggle="tooltip"]').tooltip(); //提示訊息-啟用 
+    }); //function END
+</script>
+</html>

@@ -6,7 +6,7 @@
 //開資料庫-預設開啟資料庫
 function _mysql_open($table_db = '')
 {
-    global $cfg;
+      global $cfg;
     $i = $cfg['servers']['y'];
     $dbusername = $cfg['servers'][$i]['user'];
     $dbpassword = $cfg['servers'][$i]['password'];
@@ -22,7 +22,7 @@ function _mysql_open($table_db = '')
     //$mysqli->query("USE ".$database);//切換資料庫
 
     if (mysqli_connect_errno($mysqli)) {
-        echo "連接 MySQL 失敗: ",mysqli_connect_error();
+        echo "連接 MySQL 失敗: ", mysqli_connect_error();
     }
     return $mysqli;
 }
@@ -44,7 +44,6 @@ function mysqluse($dblink, $db)
 {
     _sql($dblink, "USE `" . $db . "`");
 }
-
 
 //以IN查資料 給陣列變為要入SQL的字-----這段不一樣注意注意
 function idgroup($array = array())
@@ -69,13 +68,12 @@ function idgroup($array = array())
     }
 }
 
-
 //不連結資料庫-以欄名建立二維陣列
 function assoc_sql($sql, $dblink)
 {
-	$array=array();
+    $array = array();
     $result = mysqli_query($dblink, $sql) or die("error 單行查詢錯誤: " . $sql); //帶入查詢語法;
-//查詢結果抓出一筆存入array[]陣列
+    //查詢結果抓出一筆存入array[]陣列
     while ($row = mysqli_fetch_assoc($result)) {
         $array[] = $row;
     }
