@@ -60,8 +60,8 @@ if (count($ok_show_databases) > 0) {
 $DATANAME = $DATANAME2;
 
 //===========================================================
-if (isset($_GET['DATANAME'])) {
-    $database = $_GET['DATANAME'];
+if (isset($_GET['database'])) {
+    $database = $_GET['database'];
     $db->mysqluse($database, $dblink); //切換資料庫
 }
 //===========================================================
@@ -155,8 +155,6 @@ require INCLUDE_PATH . '/inc_head.php'; //載入表頭
 <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <!-- 字體圖示 -->
 <link rel="stylesheet" href="skin/css/font-awesome.min.css">
-<!-- 本頁專用 -->
-<link href="skin/css/admin.css" rel="stylesheet">
 </head>
 <body data-spy="scroll" data-target="#navbar-fixed-top" data-offset="20">
 <!--滾動監聽 S-->
@@ -194,14 +192,14 @@ if ($database) {
         <select name="goto_url">
             <option value="" selected>選擇資料庫</option>
             <?php
-for ($i = 0; $i < count($DATANAME); $i++) {
-    if ($database == $DATANAME[$i]) {
-        $selected = "selected=\"selected\"";
-    } else {
-        $selected = "";
-    }
-    echo "<option value=\"" . $_file . "?DATANAME=" . $DATANAME[$i] . "\" " . $selected . " >" . $DATANAME[$i] . "</option>";
-}
+            for ($i = 0; $i < count($DATANAME); $i++) {
+                if ($database == $DATANAME[$i]) {
+                    $selected = "selected=\"selected\"";
+                } else {
+                    $selected = "";
+                }
+                            echo "<option value=\"" . $_file . "?database=" . $DATANAME[$i] . "\" " . $selected . " >" . $DATANAME[$i] . "</option>";
+            }
 ?>
         </select>
     </h3>
@@ -219,16 +217,16 @@ for ($i = 0; $i < count($DATANAME); $i++) {
 <div class="tab_memu">
     <ul class="nav nav-tabs" role="tablist">
         <?php
-for ($i = 0; $i < count($typenamech2); $i++) {
-    //預設顯示3類中哪一類
-    if ($i < 1) {
-        $in = 'class="active"';
-    } else {
-        $in = "";
-    }
-    $key = $i + 1;
-    echo '<li role="presentation" ' . $in . '><a href="#home' . $key . '" data-toggle="tab" role="tab" aria-controls="tab' . $key . '"  onclick="cookie_intype(' . $key . ');">' . $typenamech2[$i] . '</a></li>';
-}
+        for ($i = 0; $i < count($typenamech2); $i++) {
+            //預設顯示3類中哪一類
+            if ($i < 1) {
+                $in = 'class="active"';
+            } else {
+                $in = "";
+            }
+                    $key = $i + 1;
+                    echo '<li role="presentation" ' . $in . '><a href="#home' . $key . '" data-toggle="tab" role="tab" aria-controls="tab' . $key . '"  onclick="cookie_intype(' . $key . ');">' . $typenamech2[$i] . '</a></li>';
+        }
 ?>
     </ul>
 </div>
@@ -252,12 +250,12 @@ for ($i = 0; $i < count($typenamech2); $i++) {
                             <select name="goto_datasheet">
                                 <option value="" selected>選擇資料表</option>
                                 <?php
-$b2 = $tablesB['TABLE_NAME0'];
-foreach ($b2 as $k => $v) {
-    $selected = "";
-    //注意這裡一定要使用原來的表名
-    echo "<option value=\"" . $v . "\" " . $selected . " >" . $v . "</option>";
-}
+                                $b2 = $tablesB['TABLE_NAME0'];
+                                foreach ($b2 as $k => $v) {
+                                    $selected = "";
+                                    //注意這裡一定要使用原來的表名
+                                    echo "<option value=\"" . $v . "\" " . $selected . " >" . $v . "</option>";
+                                }
 ?>
                             </select>
                         </h3>
@@ -282,128 +280,20 @@ foreach ($b2 as $k => $v) {
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <?php
+<?php
 //有指定資料庫 情況 S
 if ($database) {
-    ?>
-                        <h1 style="text-align:center;">
-                            <?=$database?>數據庫字典&nbsp;
-                            <button type="button" id="replace_editingid" class="btn btn-default" title="點此按鈕可以切換編輯狀態" onclick="javascript:replace_editing();" ><i class="icon-pencil"></i></button>
-                        </h1>
-                        <hr>
-
-                        <!--響應式表格-->
-                        <div class="generallist">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered">
-                                    <thead>
-                                    <tr class="info2">
-                                        <th class="sno">序號</th>
-                                        <th>表名</th>
-                                        <th>別人打的</th>
-                                        <th>我打的</th>
-                                        <th class="w50px">修改</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php
-//列出所有表
-
-    $c1 = $tablesB['TABLE_NAME'];
-    $c2 = $tablesB['TABLE_COMMENT0']; //註解
-    for ($i = 0; $i < count($c1); $i++) {
-        $cid = "edit_" . $tablesB['TABLE_NAME0'][$i]; //用原來的名 ID的規則是不能有點
-        echo "<tr class=\"csssssss\">" . $bn;
-        echo "<td class=\"cc\">" . ($i + 1) . "</td>" . $bn;
-        echo "<td><a class=\"page-scroll\" href=\"#" . $c1[$i] . "\">" . $c1[$i] . "</a></td>" . $bn;
-        echo "<td class=\"c4\">" . _lang($c1[$i], $lang_tablenames) . "</td>" . $bn;
-        echo "<td><textarea class=\"w100 h100\" name=\"edit_text\" rows=\"1\" id=\"" . $cid . "\">" . $c2[$i] . "</textarea></td>" . $bn; //修改
-        echo '<td>';
-        echo '<button type="button" class="btn5 w50px" data-container="body" data-toggle="popover" data-placement="right" id="b' . $cid . '">修改</button>';
-        echo '</td>' . $bn; //修改按鈕END
-        echo "</tr>" . $bn;
-    }
-    ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <hr>
-                        <div id="div_home2">
-                            <div class="warp" >
-                            <?php echo $html; ?>
-                            </div>
-                        </div>
-<script>
- $(function() {
-
-        //工具提示啟用
-        $("[data-toggle='popover']").popover({html: true,content:function (e){
-            var s=$(this).attr('id');
-            return '<div id="popoverid_'+s+'">儲存中...</div>';
-            }
-        });
-
-        //var storage_status=0;
-        //監測
-        $("[data-toggle='popover']").on('shown.bs.popover', function (e) {
-        //if (storage_status==0){
-            var gid2=e.currentTarget.id;
-            var gid3=gid2.replace(/\./g,"\\.");//如果欄位名中有.這樣可以讓他正常
-            var gid=gid3.substring(6);//截短6個字
-            var name='#'+gid3.substring(1);
-            var edittext=$(name).val();
-                if(edittext==undefined){
-                     console.log('錯誤'); //測試使用
-                }
-            var pdata = new Object();
-            pdata.database ='<?=$database?>';
-            pdata.tablename =gid2.substring(6);//截短6個字
-            pdata.edittext =edittext;
-            var el=$(this);
-            el.attr('disabled', 'disabled');//按鈕禁用
-            //console.log( pdata ); //測試使用
-            //storage_status++;
-            $.post( "ajax/goto_edit.php", pdata, function ( data ) {
-                if ( data.ok ) {
-                    //成功 S
-                    console.log(data); //測試使用
-                    setTimeout(function () {
-                        //el.popover('destroy');//銷毀
-                        //el.popover("hide");//關掉彈出框
-                        //el.popover({content :data.sms});//改內容
-                        $('#popoverid_'+gid2).text(data.sms);//改內容
-                            setTimeout(function () {
-                            el.popover("hide");//關掉彈出框
-                                setTimeout(function () {
-                                el.removeAttr('disabled');//按鈕能用
-                                //storage_status=0;//恢復監聽
-                                },200);
-                            },500);
-                    },500);
-                    //成功 END
-                } else {
-                    //失敗
-                        //console.log(data.sms); //測試使用
-                        //關鍵不能同一時間2個指令
-                        setTimeout(function () {
-                        $('#popoverid_'+gid2).text(data.sms);//改內容
-                            setTimeout(function () {
-                            el.popover("hide");//關掉彈出框
-                                setTimeout(function () {
-                                el.removeAttr('disabled');//按鈕能用
-                                //storage_status=0;//恢復監聽
-                                },200);
-                            },700);
-                        },500);
-                    }
-                }, 'json' );
-       // }//storage_status if END
-        });
-
-});//function END
-
-</script>
+?>
+<h1 style="text-align:center;">
+    <?=$database?>數據庫字典&nbsp;
+    <button type="button" id="replace_editingid" class="btn btn-default" title="點此按鈕可以切換編輯狀態" onclick="javascript:replace_editing();" ><i class="icon-pencil"></i></button>
+</h1>
+<hr>
+<div id="div_home2_b1"></div>
+<hr>
+<div id="div_home2_b2"><div class="warp" >
+    <?php echo $html; ?>
+</div></div>           
 <?php
 } //有指定資料庫 情況 END
 ?>
@@ -455,6 +345,8 @@ require '_inc/inc_footer_s.php'; //載入表尾
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
 <!--jqueryui CSS 使用Tooltip功能必須-->
 <link type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.min.css" rel="stylesheet" />
+<!-- 本頁專用 -->
+<link href="skin/css/DataDictionaryTool.css" rel="stylesheet">
 
 <script type="text/javascript">
     //重整
@@ -479,14 +371,7 @@ require '_inc/inc_footer_s.php'; //載入表尾
     //載入完就啟用 開始*****************************/
     $(function () {
 
-        //連結捲過去有使用jquery-ui
-        $('a.page-scroll').bind('click', function (event) {
-            var $anchor = $(this);
-            $('html, body').stop().animate({
-                scrollTop: $($anchor.attr('href')).offset().top
-            }, 1500, 'easeInOutExpo');
-            event.preventDefault();
-        });
+
         // 綁定下拉式選項跳頁
         // 如果jQuery版本是 < 1.7, 取代 on 使用 bind
         $('select[name="goto_url"]').on('change', function () {
@@ -501,8 +386,7 @@ require '_inc/inc_footer_s.php'; //載入表尾
             var url = $(this).val(); // get selected value
             if (url) {
                 //window.location = url; // redirect
-                $("#div_home1").load("ajax/goto_datasheet.php?database=<?=$database?>&tablename=" + url);
-
+                $("#div_home1").load("ajax/goto_datasheetb2.php?database=<?=$database?>&tablename=" + url);
             }
             return false;
         });
@@ -524,43 +408,56 @@ require '_inc/inc_footer_s.php'; //載入表尾
             $('.l_scroll').animate({"left":-200},500);
         });
 
-        $('#replace_editingid').mouseover(function() { 
-            $(this).tooltip('show'); 
-        }) 
+        //JQUARYUI訊息提示
+        $('#replace_editingid').tooltip({
+        //跟隨滑鼠爆炸效果
+        track: true,
+        hide: {
+            effect: "explode",
+            delay: 250
+        }
+        });
+<?php
+//有指定資料庫 情況 S
+if ($database) {
+?>
+    //全顯不可編輯
+    $("#div_home2_b1").load("ajax/goto_datasheetb1.php?database=<?=$database?>&etitokdiv=0&prefix=<?=$prefix?>",
+        setTimeout(function() {
+        //因為失效重啟
+        //連結捲過去有使用jquery-ui
+            $('a.page-scroll').on('click',function(){
+            var str = $(this).attr("href");   
+            var the_id2 = str.substr(1);
+            var the_id =the_id2.replace(/\./g, "\\."); //如果欄位名中有.這樣可以讓他正常
+            //console.log(the_id); //測試使用
+            $('html, body').animate({ scrollTop: $('#'+the_id).offset().top }, 1000, 'easeInOutExpo');
+            event.preventDefault();//阻止元素發生默認的行為
+            });
+
+        }, 500)
+    );
+<?php
+}
+?>
+
     });//function END
 //可編輯不可編輯切換
 var $replace_editing=0;
 function replace_editing(){
     if($replace_editing){
-    $("#div_home2").load("ajax/goto_datasheet.php?database=<?=$database?>&tablename=1&powerswitch=b&prefix=<?$prefix?>");//全顯不可編輯
     $replace_editing=0;
+    //全顯不可編輯S
+    $("#div_home2_b1").load("ajax/goto_datasheetb1.php?database=<?=$database?>&etitokdiv=0&prefix=<?=$prefix?>");//全顯不可編輯
+    $("#div_home2_b2").load("ajax/goto_datasheetb2.php?database=<?=$database?>&tablename=1&powerswitch=b&prefix=<?=$prefix?>");
+    //全顯不可編輯END
     }else{
-    $("#div_home2").load("ajax/goto_datasheet.php?database=<?=$database?>&tablename=1&powerswitch=a&prefix=<?$prefix?>");//全顯可編輯
     $replace_editing=1;
+    //全顯可編輯 S
+    $("#div_home2_b1").load("ajax/goto_datasheetb1.php?database=<?=$database?>&etitokdiv=1&prefix=<?=$prefix?>");//全顯可編輯
+    $("#div_home2_b2").load("ajax/goto_datasheetb2.php?database=<?=$database?>&tablename=1&powerswitch=a&prefix=<?=$prefix?>");
+    //全顯可編輯 END
     }
 }
 </script>
- <style>
-  /*訊息框樣式*/
-  .ui-tooltip {
-    padding: 10px 20px;
-    border-radius: 20px;
-    font: bold 14px;
-    text-transform: uppercase;
-    box-shadow: 0 0 5px black;
-  }     
-
-  </style>
-  <script>
-  $(function() {
-    $( document ).tooltip({
-     //跟隨滑鼠爆炸效果
-      track: true,
-      hide: {
-        effect: "explode",
-        delay: 250
-      }
-    });
-  });
-  </script>
 </html>

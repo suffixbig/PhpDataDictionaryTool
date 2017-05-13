@@ -19,3 +19,7 @@ http://test.com/github_cloud/PhpDataDictionaryTool/
 	20170505 除錯紀錄 接收tablename值有加上字尾
 http://test.com/github_cloud/PhpDataDictionaryTool/index.php?DATANAME=credit
 http://test.com/github_cloud/PhpDataDictionaryTool/ajax/goto_datasheet.php?database=credit&tablename=text
+
+
+#測試
+view-source:http://test.com/github_cloud/PhpDataDictionaryTool/ajax/goto_datasheetb1.php?database=credit&etitokdiv=1

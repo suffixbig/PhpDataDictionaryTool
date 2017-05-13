@@ -1,0 +1,110 @@
+<!--響應式表格-->
+<div class="generallist">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr class="info2">
+                    <th class="sno">序號</th>
+                    <th>表名</th>
+                    <th>別人打的</th>
+                    <th>我打的</th>
+                    <th class="w50px">修改</th>
+                </tr>
+            </thead>
+            <tbody>
+<?php
+//列出所有表
+
+$c1 = $tablesB['TABLE_NAME'];
+$c2 = $tablesB['TABLE_COMMENT0']; //註解
+for ($i = 0; $i < count($c1); $i++) {
+$cid = "edit_" . $tablesB['TABLE_NAME0'][$i]; //用原來的名 ID的規則是不能有點
+echo "<tr class=\"csssssss\">" . $bn;
+echo "<td class=\"cc\">" . ($i + 1) . "</td>" . $bn;
+echo "<td><a class=\"page-scroll\" href=\"#" . $c1[$i] . "\">" . $c1[$i] . "</a></td>" . $bn;
+echo "<td class=\"c4\">" . _lang($c1[$i], $lang_tablenames) . "</td>" . $bn;
+echo "<td><textarea class=\"w100 h100\" name=\"edit_text\" rows=\"1\" id=\"" . $cid . "\">" . $c2[$i] . "</textarea></td>" . $bn; //修改
+echo '<td>';
+echo '<button type="button" class="btn5 w50px" data-container="body" data-toggle="popover" data-placement="right" id="b' . $cid . '">修改</button>';
+echo '</td>' . $bn; //修改按鈕END
+echo "</tr>" . $bn;
+}
+?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</div>
+<!--/.generallist-->
+<script>
+    $(function() {
+
+        //工具提示啟用
+        $("[data-toggle='popover']").popover({
+            html: true,
+            content: function(e) {
+                var s = $(this).attr('id');
+                return '<div id="popoverid_' + s + '">儲存中...</div>';
+            }
+        });
+
+        //var storage_status=0;
+        //監測
+        $("[data-toggle='popover']").on('shown.bs.popover', function(e) {
+            //if (storage_status==0){
+            var gid2 = e.currentTarget.id;
+            var gid3 = gid2.replace(/\./g, "\\."); //如果欄位名中有.這樣可以讓他正常
+            var gid = gid3.substring(6); //截短6個字
+            var name = '#' + gid3.substring(1);
+            var edittext = $(name).val();
+            if (edittext == undefined) {
+                console.log('錯誤'); //測試使用
+            }
+            var pdata = new Object();
+            pdata.database = '<?=$database?>';
+            pdata.tablename = gid2.substring(6); //截短6個字
+            pdata.edittext = edittext;
+            var el = $(this);
+            el.attr('disabled', 'disabled'); //按鈕禁用
+            //console.log( pdata ); //測試使用
+            //storage_status++;
+            $.post("ajax/goto_edit.php", pdata, function(data) {
+                if (data.ok) {
+                    //成功 S
+                    console.log(data); //測試使用
+                    setTimeout(function() {
+                        //el.popover('destroy');//銷毀
+                        //el.popover("hide");//關掉彈出框
+                        //el.popover({content :data.sms});//改內容
+                        $('#popoverid_' + gid2).text(data.sms); //改內容
+                        setTimeout(function() {
+                            el.popover("hide"); //關掉彈出框
+                            setTimeout(function() {
+                                el.removeAttr('disabled'); //按鈕能用
+                                //storage_status=0;//恢復監聽
+                            }, 200);
+                        }, 500);
+                    }, 500);
+                    //成功 END
+                } else {
+                    //失敗
+                    //console.log(data.sms); //測試使用
+                    //關鍵不能同一時間2個指令
+                    setTimeout(function() {
+                        $('#popoverid_' + gid2).text(data.sms); //改內容
+                        setTimeout(function() {
+                            el.popover("hide"); //關掉彈出框
+                            setTimeout(function() {
+                                el.removeAttr('disabled'); //按鈕能用
+                                //storage_status=0;//恢復監聽
+                            }, 200);
+                        }, 700);
+                    }, 500);
+                }
+            }, 'json');
+            // }//storage_status if END
+        });
+
+    }); //function END
+</script>
