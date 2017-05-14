@@ -42,7 +42,7 @@ $i=1;//本次使用第幾組設定
 //**************************
 //後台是否要密碼才能進入0否1是
 //**************************
-define("background_switch",1);
+define("background_switch",0);
 //是的話密碼是什麼
 define("background_password", "taiwanno1"); 
 

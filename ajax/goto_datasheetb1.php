@@ -155,7 +155,7 @@ echo '
             html: true,
             content: function(e) {
                 var s = $(this).attr(\'id\');
-                return \'<div id="popoverid_\' + s + \'">儲存中...</div>\';
+                return \'<div id="popoverid_\' + s + \'">'._lang('stored_in',$lang).'</div>\';
             }
         });
         //var storage_status=0;
@@ -181,7 +181,7 @@ echo '
             $.post("ajax/goto_edit.php", pdata, function(data) {
                 if (data.ok) {
                     //成功 S
-                    console.log(data); //測試使用
+                    //console.log(data); //測試使用
                     setTimeout(function() {
                         //el.popover("destroy");//銷毀
                         //el.popover("hide");//關掉彈出框

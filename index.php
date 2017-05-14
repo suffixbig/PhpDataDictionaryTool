@@ -311,10 +311,7 @@ if ($database) {
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <button id="zero">歸零</button>
-                    <button id="btn">顯示數據</button>
-                    <br/>
-                    <div id="svg123"></div>
+                    <div id="div_home3">自由拖拉這是一個敢說是我全球首創的功能，沒開發完成前畫面就讓我保有機密</div>
                 </div>
             </div>
             <!--./row./col-md-12-->
@@ -458,6 +455,50 @@ function replace_editing(){
     $("#div_home2_b2").load("ajax/goto_datasheetb2.php?database=<?=$database?>&tablename=1&powerswitch=a&prefix=<?=$prefix?>");
     //全顯可編輯 END
     }
+}
+//修改
+function edit_im(TABLE_NAME0,COLUMN_NAME,gid){
+			var gid2 = gid.replace(/\./g, "\\."); //如果欄位名中有.這樣可以讓他正常
+            var edittext = $('#' + gid2).val();
+            var pdata = new Object();
+            pdata.database = '<?=$database?>';
+            pdata.tablename = TABLE_NAME0
+            pdata.column_name = COLUMN_NAME;
+            pdata.edittext = edittext;
+            var el = $('#b' + gid2);
+            el.popover({html: true,content :'<div id="popoverid2_'+gid+'"><?=_lang('stored_in',$lang)?></div>'});//改內容
+            el.popover("show");//彈出框
+            el.attr('disabled', 'disabled'); //按鈕禁用
+            $.post("ajax/goto_editb.php", pdata, function(data) {
+                if (data.ok) {
+                    //成功 S
+                    //console.log(data); //測試使用
+                    setTimeout(function() {
+                        $("#popoverid2_" + gid2).text(data.sms); //改內容
+                        setTimeout(function() {
+                            el.popover("hide"); //關掉彈出框
+                            setTimeout(function() {
+                                el.removeAttr("disabled"); //按鈕能用
+                            }, 200);
+                        }, 500);
+                    }, 500);
+                    //成功 END
+                } else {
+                    //失敗
+                    //console.log(data.sms); //測試使用
+                    //關鍵不能同一時間2個指令
+                    setTimeout(function() {
+                        $("#popoverid2_" + gid2).text(data.sms); //改內容
+                        setTimeout(function() {
+                            el.popover("hide"); //關掉彈出框
+                            setTimeout(function() {
+                                el.removeAttr("disabled"); //按鈕能用
+                            }, 200);
+                        }, 700);
+                    }, 500);
+                }
+            }, "json");
+            // }//storage_status if END
 }
 </script>
 </html>

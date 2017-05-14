@@ -5,6 +5,8 @@ define('WEB_ROOT_PATH', str_replace('\\','/',dirname(__FILE__))); //目前檔案
 define('INCLUDE_PATH', WEB_ROOT_PATH . '/_inc');//設定檔所在目錄
 $CT_CONFIG['logo_title']='數據字典';//網站名子
 $CT_CONFIG['html_title']=$CT_CONFIG['logo_title'];//網頁標題
+$CT_CONFIG['language']='zh-tw';//語系設置
+require(INCLUDE_PATH.'/language/' . $CT_CONFIG['language'] . '.php' ); //載入語言策略
 /*******************************************************************************************************/
 /*陣列字串代換函式   A陣列為主 B陣列為轉換目標 2者數目要相同  若B陣列比數目較小也是會建立 預設的值為無****************/
 function GetIndexName( $aryIndex, $aryName ) {
@@ -17,6 +19,7 @@ function GetIndexName( $aryIndex, $aryName ) {
 	}
 	return $sBuf;
 }
+
 //字串翻譯 參數1 英文，
 function _lang($key,$array){
 		if(is_array($key))

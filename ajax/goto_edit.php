@@ -10,7 +10,7 @@ require_once INCLUDE_PATH."/global_suffix.php";     // 載入資料庫函式
 //http://test.com/github_cloud/PhpDataDictionaryTool/ajax/goto_edit.php?database=cart_opencart_00&tablename=oc_affiliate&edittext=abc
 /***********************************************************************************************/
 $err_ok = 1;//缺少參數要失敗
-$r[ 'sms' ] = '修改失敗';
+$r[ 'sms' ] = _lang('fail_to_edit',$lang);
 if(isset($_POST['database']) && isset($_POST['tablename']) &&  isset($_POST['edittext']) ) {
 
 	$database=trim($_POST['database']);
@@ -27,14 +27,13 @@ if ($database) {
 	$sql.="COMMENT='".$edittext."' ";
 	$ok=$db->_sql($sql,$dblink);//成功不會有返回值
 	$err_ok = 0;//參數都有
-	$r[ 'sms' ] = '修改完成';
 }
 //===========================================================
 //有指定資料庫 情況 END
 $db->mysql_close($dblink); //關資料庫========================================================
 	}else{
 		$err_ok = 1;//缺少參數要失敗
-		$r[ 'sms' ] = '沒填內容你要改啥';
+		$r[ 'sms' ] = _lang('No_content_to_change_Han',$lang);
 	}
 
 }
@@ -45,6 +44,6 @@ if ( $err_ok ) {
 
 }else{
 	$r[ 'ok' ] = 1;
-	$r[ 'sms' ] = '修改成功';
+	$r[ 'sms' ] = _lang('The_modification_is_complete',$lang);
 }				
 echo json_encode( $r ); //返回json_encode
