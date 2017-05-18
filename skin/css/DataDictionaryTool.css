@@ -20,9 +20,12 @@ h2, .h2{font-size:2.3rem}
 h3, .h3{font-size:2rem}
 h4, .h4{font-size:1.5rem}
 fieldset {font-size:1.5rem}
+.fontssize05rem{font-size:0.5rem}
 .fontssize1rem{font-size:1rem}
 .fontssize2rem{font-size:2rem}
 .fontssize3rem{font-size:3rem}
+.fontssize12px{font-size:12px}
+.fontssize12px{font-size:14px}
 /*所有字體的大小以比例來設定　E*********************************************/
 /*通用類設定　S***********************************************************/
 /*錨點*/

@@ -210,6 +210,7 @@ if ($database) {
     <h1 class="text_shadow">
         <?=$db_namec?>
     </h1>
+          	<div class="fontssize14px">方便就是極難超越的價值</div>
 </div>
 <!--PC頁簽區hidden-xs-->
 <div class="tab_memu">
