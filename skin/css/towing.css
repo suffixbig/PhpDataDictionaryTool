@@ -1,0 +1,40 @@
+/*拖曳區*/
+.searchdiv{margin-left:1%;margin-right:1%;border-radius:8PX; padding:2%; margin-bottom:20px; -moz-box-shadow: 0px 4px 4px #666;-webkit-box-shadow: 0px 4px 4px #666; box-shadow: 0px 4px 4px #666;}
+.searchdiv{background: #30c1cb;}
+/*拖曳區大小*/
+.xwg-search-bar {width: 100%;box-shadow: 1px 0 2px #30c1cb;position:relative}
+
+
+
+/*自定義下拉框*/
+.xwg-select .select { width: 88px; padding-left: 12px; line-height: 30px; border-radius: 6px; box-shadow: 0 4px #009ca6; background: #61d6de; position: relative;}
+/*間距*/
+.xwg-search-bar .inner{ padding: 0px; margin: 0; position:relative }
+/*4px邊線做成下陰影*/
+.xwg-search-bar .search-btn{ display: inline-block;line-height: 30px; border-radius: 6px; box-shadow: 0 4px #d49800; background: #ffe259; color: #40220f; text-align: center;}
+/*#移過去有滑鼠指標-手指*/
+.search-btn.xwg-fl{cursor: pointer;}
+.search-btn.xwg-fl{text-align: center;font-size: 2em;}
+/*#移過去換色*/
+.xwg-search-bar .search-btn:hover { background: #fbe681;}
+
+/*搜尋按鈕*/
+.startsearch{ width:100%; height:45px; line-height:45px; text-align:center; font-size:16px; color:#FFF; background:#ff6f6f;border-radius:6px;box-shadow: 0px 3px 0px #d95e5e; margin-top:25px; letter-spacing:5px; margin-bottom:15px; }
+.startsearch a{
+	color: #FFF !important;
+	text-shadow: 0 1px 0 #000 !important;
+	text-decoration: none !important;
+	display: block;
+}
+.startsearch a:hover {background:#ff4f4f;border-radius:6px;}
+
+/*手機******************************************************************************************************************/
+/*每個方塊間隔*/
+#mBox1 div{padding: 10px 20px 10px 20px; margin-right: 0px;margin-bottom:10px }
+#mBox2 div,#mBox3 div{padding: 10px 20px 10px 20px; margin-right:0px;margin-bottom:10px }
+/*超過這尺寸時*/
+@media only screen and (min-width:415px) {#mBox1 div{margin-right:20px;}}
+/*可以拖曳的3區虛線邊框*/
+#mBox1,#mBox2,#mBox3{padding:10px;border:3px #ddd dashed;}
+.box-state-highlight{border:4px #fff dashed !important; background-color:#000;opacity: 0.2;box-sizing:content-box;}
+#mBox2,#mBox3{height:55px;}

@@ -20,6 +20,9 @@ h2, .h2{font-size:2.3rem}
 h3, .h3{font-size:2rem}
 h4, .h4{font-size:1.5rem}
 fieldset {font-size:1.5rem}
+.fontssize1rem{font-size:1rem}
+.fontssize2rem{font-size:2rem}
+.fontssize3rem{font-size:3rem}
 /*所有字體的大小以比例來設定　E*********************************************/
 /*通用類設定　S***********************************************************/
 /*錨點*/
@@ -48,6 +51,12 @@ fieldset {font-size:1.5rem}
 .height10{ height:1.3rem}
 /*排序字*/
 .gray{color:#969696;}
+/* =======================公共樣式=============================== */
+.xwg-fl { float: left;}
+.xwg-fr { float: right;}
+.xwg-mod-wrap .fa { font-size: 14px; color: #fff;}
+/*進一步清除浮動法*/
+.clearfix:after {content:"\200B"; display:block; height:0;clear:both;}
 /*===========================================*/
 /*用 CSS 讓過長溢出的字省略變 ... */
 /*===========================================*/

@@ -309,7 +309,41 @@ if ($database) {
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div id="div_home3">自由拖拉這是一個敢說是我全球首創的功能，沒開發完成前畫面就讓我保有機密</div>
+                    <div id="div_home3">
+                    
+                    
+                    
+<!--手機板拖曳區 S-->
+<div class="searchdiv">
+	<div align="center" class="fontssize3rem">直覺<span class="fontssize2rem">(要列印的拖到右區)</span></div>
+<div class="xwg-search-bar">
+ <table  width="100%" border="0" class="inner">
+  <tbody>
+    <tr>
+      <td id="mBox1"  class="clearfix" width="50%">
+          <?php
+//有指定資料庫 情況 S
+if ($database) {
+            $b2 = $tablesB['TABLE_NAME0'];
+            foreach ($b2 as $k => $v) {
+            //注意這裡一定要使用原來的表名
+        	echo '<div id="'.$v.'" class="search-btn xwg-fl" >'.$v.'</div>';
+            }
+}
+            ?>
+      </td>
+      <td width="50%" valign="top" class="clearfix" id="mBox2"></td>
+    </tr>
+  </tbody>
+</table><!--/inner xwg-clearfix-->
+<hr style="margin-top:35px; height:1px; border-bottom:#CCC solid 1px;margin-bottom:20px;width: 104%;margin-left: -2%;"></hr>
+<div class="startsearch"><a href="javascript:void();" onclick="sub()">列印</a></div>    
+</div><!--/xwg-search-bar-->
+</div>
+<!--手機板拖曳區 END-->   
+                    
+                    
+                    </div>
                 </div>
             </div>
             <!--./row./col-md-12-->
@@ -340,42 +374,24 @@ require '_inc/inc_footer_s.php'; //載入表尾
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
 <!--jqueryui CSS 使用Tooltip功能必須-->
 <link type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.min.css" rel="stylesheet" />
+<!--拖曳手機支援-->
+<script type="text/javascript" src="skin/js/jquery.ui.touch-punch.min-0.2.3.js"></script>
+
 <!-- 本頁專用 -->
 <link href="skin/css/DataDictionaryTool.css" rel="stylesheet">
+<link href="skin/css/towing.css" rel="stylesheet">
 
+<!-- home頁專用 -->
+<script src="skin/js/suffixbig.js" type="text/javascript"></script>
 <script type="text/javascript">
-    //重整
-    function locationabc() {
-        location.reload(true);
-    }
-    //把選項記憶一天
-    function cookie_intype($s) {
-        $.cookie('im_type_ad', $s, {
-            path: '/',
-            expires: 10
-        });
-    }
+//載入完就啟用 開始*****************************/
+$(function () {
 
-    function cookie_insale($s) {
-        $.cookie('sale', $s, {
-            path: '/',
-            expires: 10
-        });
-        locationabc();
-    }
-    //載入完就啟用 開始*****************************/
-    $(function () {
+<?php
+//有指定資料庫 情況 S
+if ($database) {
+?>
 
-
-        // 綁定下拉式選項跳頁
-        // 如果jQuery版本是 < 1.7, 取代 on 使用 bind
-        $('select[name="goto_url"]').on('change', function () {
-            var url = $(this).val(); // get selected value
-            if (url) {
-                window.location = url; // redirect
-            }
-            return false;
-        });
         // 下拉選單
         $('select[name="goto_datasheet"]').on('change', function () {
             var url = $(this).val(); // get selected value
@@ -388,36 +404,6 @@ require '_inc/inc_footer_s.php'; //載入表尾
             return false;
         });
 
-        //--滾動監聽使用內建功能-->
-
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            // 獲取已激活的標籤頁的名稱
-            var activeTab = $(e.target).text();
-            // 獲取前一個激活的標籤頁的名稱
-             var previousTab = $(e.relatedTarget).text();
-                  if(activeTab=='全表列出')
-                     $('.l_scroll').animate({"left":0},500);
-                else
-                    $('.l_scroll').animate({"left":-200},500);
-        });
-        //關閉按鈕
-        $("#upper_right_close").click(function(){
-            $('.l_scroll').animate({"left":-200},500);
-        });
-
-        //JQUARYUI訊息提示
-        $('#replace_editingid').tooltip({
-        //跟隨滑鼠爆炸效果
-        track: true,
-        hide: {
-            effect: "explode",
-            delay: 250
-        }
-        });
-<?php
-//有指定資料庫 情況 S
-if ($database) {
-?>
     //全顯不可編輯
     $("#div_home2_b1").load("ajax/goto_datasheetb1.php?database=<?=$database?>&etitokdiv=0&prefix=<?=$prefix?>",
         setTimeout(function() {
@@ -438,7 +424,7 @@ if ($database) {
 }
 ?>
 
-    });//function END
+});//載入完就啟用 END  
 //可編輯不可編輯切換
 var $replace_editing=0;
 function replace_editing(){
