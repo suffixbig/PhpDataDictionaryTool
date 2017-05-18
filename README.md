@@ -23,10 +23,10 @@
 ---------------------------------------
 	小巧好用的mysql數據庫數據字典生成導出綠色工具
 	數據庫生成數據字典工具(PhpDataDictionaryTool)，支援數據庫包括mysql,等等，可以導出excel,word,html,xls,txt文件
-<<<<<<< HEAD
-	<img src="skin/doc/doc01.jpg">
-	<img src="skin/doc/doc02.jpg">
->>>>>>> master
+
+<img src="skin/doc/doc01.jpg">
+<img src="skin/doc/doc02.jpg">
+<img src="skin/doc/doc03.jpg">
 ---------------------------------------
 #使用方式
 ---------------------------------------
@@ -131,6 +131,7 @@ $cfg['servers'][$i]['database'] = 'opencart_00';      	//預設開啟資料庫
 		青銅	$ 1000	贊助商頁面上的文本鏈接
 ---------------------------------------
 #版本列表
+<img src="skin/doc/doc04.jpg">
 ---------------------------------------
 	0.0.0.8	
 		20170503	增加後台是否要密碼才能進入的設定，密碼提示:9個字全小寫無空格(B.C. & Lowy: 美國實況主在遊戲中大喊的一句話taiwan?)
