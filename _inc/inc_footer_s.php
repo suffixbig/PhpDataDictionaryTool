@@ -5,7 +5,7 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <p>Copyright © 2016 &nbsp;&nbsp;&nbsp;&nbsp;作者:10號工程師 <a href="https://github.com/suffixbig/PhpDataDictionaryTool" target="_blank">github 開放原碼下載處</a> <a href="README.md" target="_blank">說明</a> </p>
+        <p>Copyright © 2016 &nbsp;&nbsp;&nbsp;&nbsp;作者:10號工程師 <a href="https://github.com/suffixbig/PhpDataDictionaryTool" target="_blank">github 開放原碼下載處與說明</a> </p>
       </div>
     </div>
   </div>
