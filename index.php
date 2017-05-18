@@ -15,9 +15,7 @@ $thisDir = "."; //config.inc.php檔的相對路徑
 $_file = basename(__FILE__); //自行取得本程式名稱
 require $thisDir . "/config.inc.php"; // 載入主參數設定檔
 require $thisDir . "/config.inc.mysql.php"; //載入資料庫帳號
-if (background_switch) {
-    require INCLUDE_PATH . "/inc_password.php"; // 載入密碼登入系統
-} else {
+if (background_switch) {require INCLUDE_PATH . "/inc_password.php"; // 載入密碼登入系統
 }
 require_once INCLUDE_PATH . "/mysql.inc.php"; // 載入資料庫函式
 require_once INCLUDE_PATH . "/global_suffix.php"; // 載入資料庫函式
@@ -383,7 +381,9 @@ require '_inc/inc_footer_s.php'; //載入表尾
             var url = $(this).val(); // get selected value
             if (url) {
                 //window.location = url; // redirect
-                $("#div_home1").load("ajax/goto_datasheetb2.php?database=<?=$database?>&tablename=" + url);
+                $("#div_home1").load("ajax/goto_datasheetb2.php?database=<?=$database?>&tablename=" + url,function(responseTxt,statusTxt,xhr){ 
+                if(statusTxt=="error") alert("Error: "+xhr.status+": "+xhr.statusText);//如果加載失敗
+                });
             }
             return false;
         });

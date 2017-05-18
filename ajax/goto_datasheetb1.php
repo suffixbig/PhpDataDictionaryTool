@@ -2,8 +2,9 @@
 $thisDir = "..";                        //config.inc.php檔的相對路徑
 $_file = basename(__FILE__);        //自行取得本程式名稱
 require($thisDir."/config.inc.php");    // 載入主參數設定檔
-require(INCLUDE_PATH."/inc_password.php");  // 載入密碼登入系統
 require($thisDir."/config.inc.mysql.php" ); //載入資料庫帳號設定檔
+if (background_switch) {require INCLUDE_PATH . "/inc_password.php"; // 載入密碼登入系統
+}
 require_once INCLUDE_PATH."/mysql.inc.php";     // 載入資料庫函式
 require_once INCLUDE_PATH."/global_suffix.php";     // 載入資料庫函式
 /***********************************************************************************************/
@@ -102,9 +103,6 @@ if ($database) {
     }
 //有指定資料庫 情況 END
 }
-
-
-
 
 if($etitokdiv){
 //===========================================================
