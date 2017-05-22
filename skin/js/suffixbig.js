@@ -153,6 +153,17 @@ function recycleImage($item,$list) {
 }
 		
 function sub(){
-  alert("我還沒寫完!");
+
+	 var ssss =$("#mBox2>div").length;//這下面的DIV有幾個
+
+	
+    alert(ssss);
+	all=$("#mBox2>div").[0];
+	//var _this = $(this);
+	//id[]=_this.attr('id');
+	console.log(ssss); //測試使用
+	console.log(all); //測試使用
+	);
+  return false;
 }
 //拖曳*******************************************
