@@ -152,19 +152,28 @@ function recycleImage($item, $list) {
         });
     });
 }
-
+//按鈕
 function sub() {
-
-    var ssss = $("#mBox2>div").length; //這下面的DIV有幾個
-    var idall = [];
+    var idall = []; //建一個空陣列
+    //遍歷
     $("#mBox2>div").each(function() {
-        idall = arr.splice(5, 0, $(this).attr('id'));
-
-        alert(idall);
-        //var _this = $(this);
-        //id[]=_this.attr('id');
-        console.log(idall); //測試使用
+        idall.push($(this).attr('id')); //把該DIV下的ID都加到陣列
     });
-    return false;
+
+    console.log(idall); //測試用
+    event.preventDefault(); //避免 <a> 原先應該做的動作。
 }
-//拖曳*******************************************
+//全部到右邊
+function Totheright() {
+    //遍歷
+    $("#mBox1>div").each(function() {
+        deleteImage($(this), $("#mBox2")); //移到2區
+    });
+}
+//全部到左邊
+function Totheleft() {
+    $("#mBox2>div").each(function(e) {
+        recycleImage($(this), $("#mBox1")); //移到1區
+    });
+}
+//拖曳END*******************************************

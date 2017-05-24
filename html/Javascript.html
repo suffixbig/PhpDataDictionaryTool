@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" lang="zh-TW" content="">
+    <meta name="description" content="">
+    <!-- jQuery文件。務必在bootstrap.min.js 之前引入 -->
+    <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+    <title>無標題文件</title>
+</head>
+
+<body>
+    <h1>測試javascript</h1>
+    <script>
+        var arr = {
+            name: [],
+            data: []
+        };
+
+        arr.name.push("jack"); //增加一個元素
+        arr.name.push("john"); //增加一個元素
+        arr.data.push({
+            weight: 60,
+            height: 170
+        }); //增加一個元素
+        arr.data.push({
+            weight: 62,
+            height: 175
+        }); //增加一個元素
+
+        a = JSON.stringify(arr); //透過JSON.stringify 返回的是字串喔，方便看結構所以用物件實字來表示	
+        console.log(a); //測試使用
+
+
+        function sub(e) {
+
+            var ssss = $("#mBox2>div").length; //這下面的DIV有幾個
+            var idall = [];
+            $("#mBox2>div").each(function() {
+                idall.push($(this).attr('id'));
+            });
+
+            console.log(idall); //測試使用
+
+            //e.preventDefault();//
+        }
+    </script>
+</body>
+
+</html>

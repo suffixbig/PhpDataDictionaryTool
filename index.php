@@ -337,8 +337,15 @@ if ($database) {
     </tr>
   </tbody>
 </table><!--/inner xwg-clearfix-->
+<br>
+<div align="center">
+<a href="javascript:void(0);" onclick="Totheright()"> 全選=> </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="javascript:void(0);" onclick="Totheleft()"> <=全選 </a>
+</div>
 <hr style="margin-top:35px; height:1px; border-bottom:#CCC solid 1px;margin-bottom:20px;width: 104%;margin-left: -2%;"></hr>
-<div class="startsearch"><a href="javascript:void();" onclick="sub()">列印</a></div>    
+<div class="startsearch">
+    
+    <a href="javascript:void(0);" onclick="sub()">列印</a></div>    
 </div><!--/xwg-search-bar-->
 </div>
 <!--手機板拖曳區 END-->   
