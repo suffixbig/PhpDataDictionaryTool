@@ -152,17 +152,7 @@ function recycleImage($item, $list) {
         });
     });
 }
-//按鈕
-function sub() {
-    var idall = []; //建一個空陣列
-    //遍歷
-    $("#mBox2>div").each(function() {
-        idall.push($(this).attr('id')); //把該DIV下的ID都加到陣列
-    });
 
-    console.log(idall); //測試用
-    event.preventDefault(); //避免 <a> 原先應該做的動作。
-}
 //全部到右邊
 function Totheright() {
     //遍歷

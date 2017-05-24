@@ -290,9 +290,7 @@ if ($database) {
 <hr>
 <div id="div_home2_b1"></div>
 <hr>
-<div id="div_home2_b2"><div class="warp" >
-    <?php echo $html; ?>
-</div></div>           
+<div id="div_home2_b2"><?php echo $html; ?></div>
 <?php
 } //有指定資料庫 情況 END
 ?>
@@ -348,9 +346,9 @@ if ($database) {
     <a href="javascript:void(0);" onclick="sub()">列印</a></div>    
 </div><!--/xwg-search-bar-->
 </div>
-<!--手機板拖曳區 END-->   
-                    
-                    
+<!--手機板拖曳區 END-->
+<hr>
+<div id="div_home3_b2"></div>
                     </div>
                 </div>
             </div>
@@ -494,5 +492,24 @@ function edit_im(TABLE_NAME0,COLUMN_NAME,gid){
             }, "json");
             // }//storage_status if END
 }
+
+//第三區按鈕
+function sub() {
+    var idall = []; //建一個空陣列
+    //遍歷
+    $("#mBox2>div").each(function() {
+        idall.push($(this).attr('id')); //把該DIV下的ID都加到陣列
+    });
+    console.log(idall); //測試用
+    var pdata = new Object();
+            pdata.database = '<?=$database?>';
+            pdata.prefix='<?=$prefix?>';
+            pdata.idall = idall;
+            $.post("ajax/print.php", pdata, function(data) {
+                $("#div_home3_b2").html(data);
+            });
+    event.preventDefault(); //避免 <a> 原先應該做的動作。
+}
+
 </script>
 </html>
