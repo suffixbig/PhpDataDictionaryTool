@@ -500,7 +500,12 @@ function sub() {
     $("#mBox2>div").each(function() {
         idall.push($(this).attr('id')); //把該DIV下的ID都加到陣列
     });
-    console.log(idall); //測試用
+
+    if(idall.length==0){
+       alert("右區沒有物件");
+       return false;
+    }
+
     var pdata = new Object();
             pdata.database = '<?=$database?>';
             pdata.prefix='<?=$prefix?>';
