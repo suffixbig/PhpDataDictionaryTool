@@ -314,7 +314,7 @@ if ($database) {
                     
 <!--手機板拖曳區 S-->
 <div class="searchdiv">
-	<div align="center" class="fontssize3rem">直覺<span class="fontssize2rem">(要列印的拖到右區)</span></div>
+	<div align="center" class="fontssize3rem">滑鼠拖<span class="fontssize2rem">到右區列印</span></div>
 <div class="xwg-search-bar">
  <table  width="100%" border="0" class="inner">
   <tbody>
@@ -336,14 +336,16 @@ if ($database) {
   </tbody>
 </table><!--/inner xwg-clearfix-->
 <br>
-<div align="center">
-<a href="javascript:void(0);" onclick="Totheright()"> 全選=> </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="javascript:void(0);" onclick="Totheleft()"> <=全選 </a>
+<div align="center" class="fontssize2rem text_shadow aa">
+<a href="javascript:void(0);" onclick="Totheright()"> <i class="icon-chevron-right icon-2x"></i> </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="javascript:void(0);" onclick="Totheleft()"> <i class="icon-chevron-left icon-2x"></i> </a>
 </div>
 <hr style="margin-top:35px; height:1px; border-bottom:#CCC solid 1px;margin-bottom:20px;width: 104%;margin-left: -2%;"></hr>
 <div class="startsearch">
-    
-    <a href="javascript:void(0);" onclick="sub()">列印</a></div>    
+    <form action="ajax/print.php" method="post" name="form1" id="form1" target="_blank">
+    </form>
+    <a href="javascript:void(0);" onclick="sub()">列印</a></div>
+    <fo
 </div><!--/xwg-search-bar-->
 </div>
 <!--手機板拖曳區 END-->
@@ -510,9 +512,23 @@ function sub() {
             pdata.database = '<?=$database?>';
             pdata.prefix='<?=$prefix?>';
             pdata.idall = idall;
-            $.post("ajax/print.php", pdata, function(data) {
-                $("#div_home3_b2").html(data);
-            });
+    
+$.ajax({
+  url: "ajax/printsave.php",
+  type: "POST",
+  dataType: "json",
+  data: pdata,
+  success: function(Jdata) {
+                if(Jdata.ok==1){
+                  document.form1.submit();
+                }
+  },
+  
+  error: function() {
+    alert("ERROR!!!");
+  }
+});
+  
     event.preventDefault(); //避免 <a> 原先應該做的動作。
 }
 

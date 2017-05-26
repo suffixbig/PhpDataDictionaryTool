@@ -11,19 +11,15 @@ require_once INCLUDE_PATH."/global_suffix.php";     // 載入資料庫函式
 //http://test.com/github_cloud/PhpDataDictionaryTool/ajax/goto_edit.php?database=cart_opencart_00&tablename=oc_affiliate&edittext=abc
 /***********************************************************************************************/
 
-if (empty($_POST['database'])) {
-    echo "缺少database參數";exit;
-} else {
-    $database=$_POST['database'];
-}
+$tempfile="../_save/save_database.txt";//暫存檔名
+$data = @file_get_contents($tempfile);//讀取緩存檔案
+$json=json_decode($data,true);
 
-if (isset($_POST['prefix'])) {
-    $prefix = $_POST['prefix'];
-} else {
-    $prefix = "";
-}
 
-$idall=$_POST['idall'];
+$database=$json['database'];
+$prefix=$json['prefix'];
+$idall=$json['idall'];
+
 $powerswitch='b';
 
 $html = ''; //循環所有表

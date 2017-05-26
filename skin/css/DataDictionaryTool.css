@@ -225,6 +225,9 @@ a.btn5.disabled,fieldset[disabled] a.btn5 {
 /*編輯按鈕*/
 #replace_editingid.btn.btn-default{ padding: 7px 20px;}
 #replace_editingid.btn.btn-default>i{font-size: 2rem;}
+.aa a{text-decoration:none;color: #FFFFFF;}
+.aa a:link,.aa a:visited {color: #FFFFFF;}
+.aa a:hover {color: #337ab7;}
 /*訊息框樣式 JQUERY-UI*/
   .ui-tooltip {
     padding: 10px 20px;
