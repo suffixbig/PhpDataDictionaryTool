@@ -30,7 +30,13 @@ $j=array("database"=> $database,
   );
 $j["idall"]= $idall;
 
-$tempfile="../_save/save_database.txt";//暫存檔名
+
+//檢查有沒有暫存檔目錄沒有就建立
+if(!is_dir($cfg['savedir'])){
+    mkdir($cfg['savedir']); 
+}
+
+$tempfile="../".$cfg['savedir']."/save_database.txt";//暫存檔名
 //把值存檔
 $json=json_encode($j);
 $ok1=file_put_contents($tempfile,$json);//寫檔 //該函數將返回寫入到文件內數據的字節數。

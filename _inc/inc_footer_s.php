@@ -5,7 +5,7 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <p>Copyright © 2016 &nbsp;<a href="mailto:jasonkkk@kimo.com" ><i class="icon-envelope"></i></a> &nbsp;&nbsp;&nbsp;&nbsp; 作者:台灣碼農suffixbig &nbsp;&nbsp;免費開源歡迎下載使用 <a href="https://github.com/suffixbig/PhpDataDictionaryTool" target="_blank">github下載說明</a> </p>
+        <p><a href="http://www.phpmytool.com">PhpMyTool.com</a>&nbsp;&nbsp; Copyright © 2016 &nbsp;<a href="mailto:suffixbig@gmail.com" ><i class="icon-envelope"></i></a> &nbsp;&nbsp;&nbsp;&nbsp; 作者:台灣碼農suffixbig &nbsp;&nbsp;免費開源歡迎下載使用 <a href="https://github.com/suffixbig/PhpDataDictionaryTool" target="_blank">github下載說明</a> </p>
       </div>
     </div>
   </div>

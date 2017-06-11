@@ -3,7 +3,7 @@ header("Content-Type:text/html;charset=utf-8");//全程式總編碼指定
 //date_default_timezone_set('Asia/Taipei');//設定系統時區
 define('WEB_ROOT_PATH', str_replace('\\','/',dirname(__FILE__))); //目前檔案所在絕對路徑，尾端沒協線
 define('INCLUDE_PATH', WEB_ROOT_PATH . '/_inc');//設定檔所在目錄
-$CT_CONFIG['logo_title']='數據字典';//網站名子
+$CT_CONFIG['logo_title']='PhpMyTool數據字典';//網站名子
 $CT_CONFIG['html_title']=$CT_CONFIG['logo_title'];//網頁標題
 $CT_CONFIG['language']='zh-tw';//語系設置
 require(INCLUDE_PATH.'/language/' . $CT_CONFIG['language'] . '.php' ); //載入語言策略

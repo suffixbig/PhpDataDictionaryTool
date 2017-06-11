@@ -11,7 +11,8 @@ require_once INCLUDE_PATH."/global_suffix.php";     // 載入資料庫函式
 //http://test.com/github_cloud/PhpDataDictionaryTool/ajax/goto_edit.php?database=cart_opencart_00&tablename=oc_affiliate&edittext=abc
 /***********************************************************************************************/
 
-$tempfile="../_save/save_database.txt";//暫存檔名
+$tempfile="../".$cfg['savedir']."/save_database.txt";//暫存檔名
+
 $data = @file_get_contents($tempfile);//讀取緩存檔案
 $json=json_decode($data,true);
 

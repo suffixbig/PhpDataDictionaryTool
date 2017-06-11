@@ -25,7 +25,7 @@ fieldset {font-size:1.5rem}
 .fontssize2rem{font-size:2rem}
 .fontssize3rem{font-size:3rem}
 .fontssize12px{font-size:12px}
-.fontssize12px{font-size:14px}
+.fontssize14px{font-size:14px}
 /*所有字體的大小以比例來設定　E*********************************************/
 /*通用類設定　S***********************************************************/
 /*錨點*/
@@ -73,8 +73,9 @@ fieldset {font-size:1.5rem}
   *position : static; /* IE8 IE9 */
   *word-break : keep-all; /* IE6 IE7 */
 }
-/*通用類設定　END********************************************
-
+/*通用類設定　END********************************************/
+.tt1{padding:0px;margin-bottom: -20px}
+.tt2{padding:0px;margin-top: -10px}
 /*底色標題*/
 .title-block {margin: 10px 0;text-align: center;padding: 5px 0;color: white;background-image: url(../img/banner_1920x300.jpg);}
 .title-block h4 {margin-top: 0;color: #DDD;}

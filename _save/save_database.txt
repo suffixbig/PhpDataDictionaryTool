@@ -1,1 +1,1 @@
-{"database":"credit","prefix":"oc_","idall":["member","coop-land.ru","wiki"]}
+{"database":"coachmin","prefix":"oc_","idall":["dateIntakes"]}

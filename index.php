@@ -1,12 +1,13 @@
 <?php
 /*
+phpmytool Copyright (C) 2017 suffixbig
 Create date:2017-04-19
 Last update date:2017-04-27
 Plugin Name: phpmysqli_dictionary
 Plugin URI: http://www.bkk.tw
 Description: PHP生成mysql數據庫字典工具
 Version: 1.0.1
-Author: david
+Author: suffixbig
  */
 /*
 適用PHP5.4~PHP7.0
@@ -207,10 +208,11 @@ if ($database) {
 <!--下拉跳網址 END-->
 <!-- 標題區 -->
 <div class="title-block">
+            <div class="tt1 fontssize14px">PhpMyTool</div>
     <h1 class="text_shadow">
         <?=$db_namec?>
     </h1>
-          	<div class="fontssize14px">方便就是極難超越的價值</div>
+          	<div class="tt2 fontssize14px">方便就是極難超越的價值</div>
 </div>
 <!--PC頁簽區hidden-xs-->
 <div class="tab_memu">
