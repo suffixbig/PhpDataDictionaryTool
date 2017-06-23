@@ -1,1 +1,1 @@
-{"database":"coachmin","prefix":"oc_","idall":["dateIntakes"]}
+{"database":"cart_opencart_00","prefix":"oc_","idall":["oc_attribute_group","oc_banner_image"]}

@@ -631,6 +631,7 @@ global $lang_columntype,$lang;//翻譯文字
             }
         $html .= '			</tr>' .$bn;
         //表的值COLUMN
+        //print_r($v['COLUMN']);
         foreach ($v['COLUMN'] as $f) {
             $html .= '			<tr class="csssssss">' .$bn;
             $html .= '				<td class="c1">' . $f['COLUMN_NAME'] . '</td>' .$bn;
@@ -650,12 +651,21 @@ global $lang_columntype,$lang;//翻譯文字
                 }
             //長度
             $LENGTH = "";
-            if ($f['NUMERIC_PRECISION']) {
-                $LENGTH = $f['NUMERIC_PRECISION'];
+            if ($f['DATA_TYPE']=='varchar') {
+                $LENGTH = $f['CHARACTER_MAXIMUM_LENGTH'];
+            } else if($f['DATA_TYPE']=='datetime'){
+                $LENGTH = "時間";
+            } else if($f['DATA_TYPE']=='date'){
+                $LENGTH = "時間";
+            } else if($f['DATA_TYPE']=='timestamp'){
+                $LENGTH = $f['ORDINAL_POSITION'];
+            } else if($f['DATA_TYPE']=='text'){
+                $LENGTH = $f['CHARACTER_MAXIMUM_LENGTH'];
+                  
             } else {
-                if ($f['CHARACTER_OCTET_LENGTH']) {
-                    $LENGTH = $f['CHARACTER_OCTET_LENGTH'];
-                }
+                preg_match("@\d@",$f['COLUMN_TYPE'], $matches);
+                if(isset($matches[0])){
+                $LENGTH = $matches[0];}
             }
             $html .= '				<td class="c0c">' . $LENGTH . '</td>' .$bn;
             $html .= '				<td class="c0c">' . $sssss . '</td>' .$bn;
