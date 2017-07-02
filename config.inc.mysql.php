@@ -54,10 +54,9 @@ $no_show_databases = array('information_schema', 'mysql', 'performance_schema', 
 $no_show_table = array(); //不需要顯示的數據表
 
 
-
 //特別網址下測試時-設定特別條件
 //在bkk.tw這個網址下時使用特別設定
-if(preg_match("@bkk.tw@",$_SERVER['HTTP_HOST']) or preg_match("@m729499.com@",$_SERVER['HTTP_HOST']) ){
+if(preg_match("@bkk.tw@",$_SERVER['HTTP_HOST']) or preg_match("@m729499.com@",$_SERVER['HTTP_HOST']) or preg_match("@phpmytool.com@",$_SERVER['HTTP_HOST']) ){
 	$cfg['servers'][$i]['port'] = 33306;//端口修改
 	$cfg['servers'][$i]['database'] = 'coachmin';      //預設開啟資料庫
 	$ok_show_databases =array('cart_opencart_00','credit','coachmin');//只能顯示的數據庫
