@@ -32,8 +32,8 @@ $j["idall"]= $idall;
 
 
 //檢查有沒有暫存檔目錄沒有就建立
-if(!is_dir("../".$cfg['savedir'])){
-    mkdir("../".$cfg['savedir']); 
+if(!is_dir($cfg['savedir'])){
+    mkdir($cfg['savedir']); 
 }
 
 $tempfile="../".$cfg['savedir']."/save_database.txt";//暫存檔名

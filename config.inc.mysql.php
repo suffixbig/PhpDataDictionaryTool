@@ -59,7 +59,7 @@ $no_show_table = array(); //不需要顯示的數據表
 if(preg_match("@bkk.tw@",$_SERVER['HTTP_HOST']) or preg_match("@m729499.com@",$_SERVER['HTTP_HOST']) or preg_match("@phpmytool.com@",$_SERVER['HTTP_HOST']) ){
 	$cfg['servers'][$i]['port'] = 33306;//端口修改
 	$cfg['servers'][$i]['database'] = 'coachmin';      //預設開啟資料庫
-	$ok_show_databases =array('cart_opencart_00','credit','coachmin');//只能顯示的數據庫
+	$ok_show_databases =array('cart_opencart_00','credit','coachmin','cart_eth_btc');//只能顯示的數據庫
 }
 
 $cfg['servers']['y']=$i;
