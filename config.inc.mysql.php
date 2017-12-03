@@ -11,7 +11,7 @@ $i++;//不用打2;++就是以此類推+1的意示
 $cfg['servers'][$i]['host'] = 'localhost';          		//服務器位址
 $cfg['servers'][$i]['port'] = 33306;                 		//端口
 $cfg['servers'][$i]['user'] = 'admin';            			//數據庫用戶名
-$cfg['servers'][$i]['password'] = 'dsfdsccc35%#32'; 				//密碼
+$cfg['servers'][$i]['password'] = 'dsfdscsdfcc35%#32'; 				//密碼
 $cfg['servers'][$i]['database'] = 'cart_opencart_00';      //預設開啟資料庫
 // 配置數據庫 第3組
 $i++;//不用打3;++就是以此類推+1的意示
