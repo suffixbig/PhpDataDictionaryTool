@@ -23,7 +23,7 @@ function GetIndexName( $aryIndex, $aryName ) {
 //字串翻譯 參數1 英文，
 function _lang($key,$array){
 		if(is_array($key))
-		return '翻譯凾式錯誤';
+		return '翻譯函式錯誤';
 		if(empty($array[$key]))
 		return '';
 		else
