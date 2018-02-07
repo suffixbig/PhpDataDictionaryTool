@@ -4,4 +4,4 @@
 */cache/*
 !*/cache/index.html
 !*/cache/.htaccess
-config*.*
+config.inc.mysql.php
