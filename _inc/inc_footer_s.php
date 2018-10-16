@@ -11,7 +11,7 @@
   </div>
 </footer>
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="skin/js/bootstrap/3.3.7/js/bootstrap.min.js"  ></script>
 <script>
 //載入完後就執行 S
 $(function(){

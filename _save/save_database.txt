@@ -1,1 +1,1 @@
-{"database":"cart_opencart_00","prefix":"oc_","idall":["oc_attribute_group","oc_banner_image"]}
+{"database":"sdabi_otc","prefix":"oc_","idall":["oc_news_currency"]}

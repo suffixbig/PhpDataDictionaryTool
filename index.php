@@ -141,17 +141,11 @@ exit;
  */
 $bn = "\n";
 require INCLUDE_PATH . '/inc_head.php'; //載入表頭
-/*
+?>
 <!-- 新 Bootstrap 核心 CSS 文件 -->
 <link rel="stylesheet" href="skin/js/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- 可選的Bootstrap主題文件（一般不用引入）-->
 <link rel="stylesheet" href="skin/js/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-*/
-?>
-<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 <!-- 字體圖示 -->
 <link rel="stylesheet" href="skin/css/font-awesome.min.css">
 </head>
@@ -347,7 +341,6 @@ if ($database) {
     <form action="ajax/print.php" method="post" name="form1" id="form1" target="_blank">
     </form>
     <a href="javascript:void(0);" onclick="sub()">列印</a></div>
-    <fo
 </div><!--/xwg-search-bar-->
 </div>
 <!--手機板拖曳區 END-->
