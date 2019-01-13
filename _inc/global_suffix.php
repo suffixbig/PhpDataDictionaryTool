@@ -660,12 +660,14 @@ global $lang_columntype,$lang;//翻譯文字
             } else if($f['DATA_TYPE']=='timestamp'){
                 $LENGTH = $f['ORDINAL_POSITION'];
             } else if($f['DATA_TYPE']=='text'){
-                $LENGTH = $f['CHARACTER_MAXIMUM_LENGTH'];
-                  
+                $LENGTH = $f['CHARACTER_MAXIMUM_LENGTH'];  
             } else {
-                preg_match("@\d@",$f['COLUMN_TYPE'], $matches);
+                //括號內的數字
+                preg_match('@\(\d+\)@',$f['COLUMN_TYPE'], $matches);
                 if(isset($matches[0])){
-                $LENGTH = $matches[0];}
+                    preg_match('@\d+@',$matches[0],$matches2);
+                    $LENGTH = $matches2[0];
+                }
             }
             $html .= '				<td class="c0c">' . $LENGTH . '</td>' .$bn;
             $html .= '				<td class="c0c">' . $sssss . '</td>' .$bn;
