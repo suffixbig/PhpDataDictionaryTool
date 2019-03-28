@@ -373,13 +373,20 @@ require '_inc/inc_footer_s.php'; //載入表尾
 <script src="skin/js/jquery.cookie.min.js" type="text/javascript"></script>
 <!--jqueryui-->
 <!--注意jqueryui會讓bootstrap Tooltip CSS出不來-->
+<?php
+/*
 <!--連結捲過去有使用jquery-ui-->
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
 <!--jqueryui CSS 使用Tooltip功能必須-->
 <link type="text/css" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.min.css" rel="stylesheet" />
+*/
+?>
+<!--連結捲過去有使用jquery-ui-->
+<script src="skin/js/jquery-ui.min.js" crossorigin="anonymous"></script>
+<!--jqueryui CSS 使用Tooltip功能必須-->
+<link href="skin/js/jquery-ui.min.css" type="text/css" rel="stylesheet" />
 <!--拖曳手機支援-->
 <script type="text/javascript" src="skin/js/jquery.ui.touch-punch.min-0.2.3.js"></script>
-
 <!-- 本頁專用 -->
 <link href="skin/css/DataDictionaryTool.css" rel="stylesheet">
 <link href="skin/css/towing.css" rel="stylesheet">

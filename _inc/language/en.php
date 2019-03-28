@@ -1,34 +1,19 @@
-<?
-//陣列字串代換函式   A陣列為主 B陣列為轉換目標 2者數目要相同  若B陣列比數目較小也是會建立 預設的值為無
-  function GetIndexName($aryIndex,$aryName)
-  {
-    if(count($aryIndex)!= count($aryName)){echo "A欄位".count($aryIndex)."筆B欄位".count($aryName)."筆，有資料欄位數目不相同，無法轉換"; exit;}
-     for($i=0; $i < count($aryIndex); $i++)
-    {
-        $sBuf[$aryIndex[$i]]=$aryName[$i];
-	 }		
-     return $sBuf;
-  }
-$db['coop-landru']=array("name","date","gametype","cp","maxcp","vs","maxvs","lan","r","sse");//資料要顯示的欄位順序
-
-//翻譯
-  $idx_data_cooplanr0  = array("name","date","gametype","cp","maxcp","vs","maxvs","lan","r","sse");
-  $idx_data_cooplanr1  = array("遊戲名","日期","類型","CP","MAXCP","VS","MAXVS","LAN","R","sse");
-  $name_data_cooplanr =GetIndexName($idx_data_cooplanr0,$idx_data_cooplanr1);//
-  
- /*
-    [name] => zSilencer
-    [web_cooplandru] => http://coop-land.ru/rookovodstva/6933-zsilencer-online-platformer-1998.html
-    [gametype] => Arcade
-    [cp] => x
-    [maxcp] => 0
-    [vs] => &#10003;
-    [maxvs] => 24
-    [lan] => x
-    [r] => 0
-    [date] => 2014-00-00
-    [add_date] => 2017-01-12 17:45:50
-    [steamid] => 
-    [steamid_scanning] => 0
+<?php
+/*
+ *|此為翻譯用檔案
+ *|創建日期為2017/02/21 創建人:10號工程師
+ *|規則為變數全用英文小寫空格就是_代替 說明文字才能有大寫英文
+ */
+/*
+//用法
+_lang('fail_to_edit',$lang);
 */
-?>
+$lang['lang']="zh-tw";//本檔語言編碼
+$lang['stored_in']='儲存中...';
+$lang['fail_to_edit']='修改失敗';
+$lang['No_content_to_change_Han' ] = '沒填內容你要改啥?';
+$lang['The_modification_is_complete' ] = '修改完成';
+
+$lang['unsigned' ] = '正數';
+$lang['unsignedzerofill' ] = '正數補零';//英文要unsigned<br>zerofill
+$lang['binary'] = '二進制';

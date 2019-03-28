@@ -1,1 +1,1 @@
-{"database":"sdabi_otc","prefix":"oc_","idall":["oc_news_currency"]}
+{"database":"html5game_membership","prefix":"oc_","idall":["coolcoin_buys","coolcoin_earns","coolcoin_wins","coolcoin_withdrawals","log_jdbapis","log_me_apis","game_type","gamelists"]}
