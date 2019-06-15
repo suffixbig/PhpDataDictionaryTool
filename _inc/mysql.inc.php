@@ -10,6 +10,7 @@ public function mysql_open($table_db = '')
 {
     global $cfg;
     $i = $cfg['servers']['y'];
+    $dbserver = $cfg['servers'][$i]['host'];
     $dbusername = $cfg['servers'][$i]['user'];
     $dbpassword = $cfg['servers'][$i]['password'];
     $database = $cfg['servers'][$i]['database'];
