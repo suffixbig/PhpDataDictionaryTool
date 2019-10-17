@@ -19,4 +19,4 @@ echo $CT_CONFIG['html_title'];
 <meta name="keywords" lang="zh-TW" content="">
 <meta name="description" content="">
 <!-- jQuery文件。務必在bootstrap.min.js 之前引入 -->
-<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
